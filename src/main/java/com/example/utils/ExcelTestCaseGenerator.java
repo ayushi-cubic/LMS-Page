@@ -564,6 +564,453 @@ public class ExcelTestCaseGenerator {
         createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
         createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
     }
+        // ==================== CONTACT MODULE TEST CASES ====================
+    
+    /**
+     * Add Contact Login Test Case
+     */
+    public void addContactLoginTestCase(boolean passed) {
+        addLoginTestCase(passed);
+    }
+    
+    /**
+     * Add Contact Navigation Test Case
+     */
+    public void addContactNavigationTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_CONTACT_NAV_001", dataStyle);
+        createCell(row, cellNum++, "Navigate to Contacts Module", dataStyle);
+        createCell(row, cellNum++, "User navigates to Contacts module from dashboard", dataStyle);
+        createCell(row, cellNum++, "1. Login to LMS application\n2. Click on Contacts module icon from sidebar", dataStyle);
+        createCell(row, cellNum++, "N/A", dataStyle);
+        createCell(row, cellNum++, "User should be navigated to Contacts page with different contact tabs (Firm, Individual, Employee, Other Parties)", dataStyle);
+        createCell(row, cellNum++, passed ? "Navigated successfully to Contacts module" : "Navigation failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Firm Contact Creation Test Case
+     */
+    public void addFirmContactCreationTestCase(boolean passed, String firmName) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_FIRM_CREATE_001", dataStyle);
+        createCell(row, cellNum++, "Create New Firm Contact", dataStyle);
+        createCell(row, cellNum++, "User creates a new Firm/Company contact", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Contacts module\n" +
+            "2. Click on Firm tab\n" +
+            "3. Click 'Add New' button\n" +
+            "4. Select 'Single Entry' from dropdown\n" +
+            "5. Select Contact Type (Firm)\n" +
+            "6. Enter Firm Name\n" +
+            "7. Enter Email (optional)\n" +
+            "8. Click Next\n" +
+            "9. Click Save", dataStyle);
+        createCell(row, cellNum++, "Firm Name: " + (firmName != null ? firmName : "Random"), dataStyle);
+        createCell(row, cellNum++, "Firm contact should be created successfully", dataStyle);
+        createCell(row, cellNum++, passed ? "Firm contact created: " + firmName : "Firm contact creation failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Individual Contact Creation Test Case
+     */
+    public void addIndividualContactCreationTestCase(boolean passed, String advocateName) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_INDIVIDUAL_CREATE_001", dataStyle);
+        createCell(row, cellNum++, "Create New Individual Contact (Advocate)", dataStyle);
+        createCell(row, cellNum++, "User creates a new Individual contact of type Advocate", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Contacts module\n" +
+            "2. Click on Individual tab\n" +
+            "3. Click 'Add New' button\n" +
+            "4. Select 'Single Entry' from dropdown\n" +
+            "5. Select Contact Type (Advocate - Option 3)\n" +
+            "6. Enter Advocate Name\n" +
+            "7. Enter Email address\n" +
+            "8. Click Next\n" +
+            "9. Click Save", dataStyle);
+        createCell(row, cellNum++, "Advocate Name: " + (advocateName != null ? advocateName : "Random"), dataStyle);
+        createCell(row, cellNum++, "Individual contact (Advocate) should be created successfully", dataStyle);
+        createCell(row, cellNum++, passed ? "Advocate contact created: " + advocateName : "Advocate contact creation failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Employee Contact Creation Test Case
+     */
+    public void addEmployeeContactCreationTestCase(boolean passed, String employeeName) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_EMPLOYEE_CREATE_001", dataStyle);
+        createCell(row, cellNum++, "Create New Employee Contact", dataStyle);
+        createCell(row, cellNum++, "User creates a new Employee contact", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Contacts module\n" +
+            "2. Click on Employee tab\n" +
+            "3. Click 'Add New' button\n" +
+            "4. Select 'Single Entry' from dropdown\n" +
+            "5. Select Contact Type (Employee - value='6')\n" +
+            "6. Enter Employee Name\n" +
+            "7. Click Next\n" +
+            "8. Click Save", dataStyle);
+        createCell(row, cellNum++, "Employee Name: " + (employeeName != null ? employeeName : "Random"), dataStyle);
+        createCell(row, cellNum++, "Employee contact should be created successfully", dataStyle);
+        createCell(row, cellNum++, passed ? "Employee contact created: " + employeeName : "Employee contact creation failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Other Party Contact Creation Test Case
+     */
+    public void addOtherPartyContactCreationTestCase(boolean passed, String otherPartyName) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_OTHERPARTY_CREATE_001", dataStyle);
+        createCell(row, cellNum++, "Create New Other Party Contact (Guarantor)", dataStyle);
+        createCell(row, cellNum++, "User creates a new Other Party contact of type Guarantor", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Contacts module\n" +
+            "2. Click on Other Parties tab\n" +
+            "3. Click 'Add New' button\n" +
+            "4. Select 'Single Entry' from dropdown\n" +
+            "5. Select Contact Type (Guarantor - value='4')\n" +
+            "6. Enter Other Party Name\n" +
+            "7. Enter Email address\n" +
+            "8. Click Next\n" +
+            "9. Click Save", dataStyle);
+        createCell(row, cellNum++, "Other Party Name: " + (otherPartyName != null ? otherPartyName : "Random"), dataStyle);
+        createCell(row, cellNum++, "Other Party contact (Guarantor) should be created successfully", dataStyle);
+        createCell(row, cellNum++, passed ? "Other Party contact created: " + otherPartyName : "Other Party contact creation failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Employee Edit Test Case
+     */
+    public void addEmployeeEditTestCase(boolean passed, String employeeName, String employeeId) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_EMPLOYEE_EDIT_001", dataStyle);
+        createCell(row, cellNum++, "Edit Employee Contact Details", dataStyle);
+        createCell(row, cellNum++, "User searches for and edits an existing Employee contact", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Contacts module\n" +
+            "2. Click on Employee tab\n" +
+            "3. Enter contact name in search field\n" +
+            "4. Click search icon\n" +
+            "5. Click on the searched contact from results\n" +
+            "6. Click on Employee details section\n" +
+            "7. Click settings (three dots) button\n" +
+            "8. Click Edit button\n" +
+            "9. Enter Employee ID\n" +
+            "10. Click Save", dataStyle);
+        createCell(row, cellNum++, 
+            "Employee Name: " + (employeeName != null ? employeeName : "As created") + "\n" +
+            "Employee ID: " + (employeeId != null ? employeeId : "Random"), dataStyle);
+        createCell(row, cellNum++, "Employee contact should be updated with new Employee ID", dataStyle);
+        createCell(row, cellNum++, passed ? "Employee ID updated for: " + employeeName : "Employee update failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Other Party Edit Test Case
+     */
+    public void addOtherPartyEditTestCase(boolean passed, String otherPartyName, String designation) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_OTHERPARTY_EDIT_001", dataStyle);
+        createCell(row, cellNum++, "Edit Other Party Contact Details", dataStyle);
+        createCell(row, cellNum++, "User searches for and edits an existing Other Party contact", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Contacts module\n" +
+            "2. Click on Other Parties tab\n" +
+            "3. Enter contact name in search field\n" +
+            "4. Click search icon\n" +
+            "5. Click on the searched contact from results\n" +
+            "6. Click on Other Parties Details tab\n" +
+            "7. Click settings (three dots) button\n" +
+            "8. Click Edit button\n" +
+            "9. Enter Designation\n" +
+            "10. Click Save", dataStyle);
+        createCell(row, cellNum++, 
+            "Other Party Name: " + (otherPartyName != null ? otherPartyName : "As created") + "\n" +
+            "Designation: " + (designation != null ? designation : "Random"), dataStyle);
+        createCell(row, cellNum++, "Other Party contact should be updated with new Designation", dataStyle);
+        createCell(row, cellNum++, passed ? "Designation updated for: " + otherPartyName : "Other Party update failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    // ==================== REPORTS MODULE TEST CASES ====================
+    
+    /**
+     * Add Reports Login Test Case
+     */
+    public void addReportsLoginTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_REPORTS_LOGIN_001", dataStyle);
+        createCell(row, cellNum++, "Login to LMS Application", dataStyle);
+        createCell(row, cellNum++, "User logs into the system to access Reports module", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Open LMS application\n" +
+            "2. Enter username\n" +
+            "3. Enter password\n" +
+            "4. Enter OTP\n" +
+            "5. Click login", dataStyle);
+        createCell(row, cellNum++, 
+            "Username: ayushi\n" +
+            "Password: Legal@1234\n" +
+            "OTP: 123456", dataStyle);
+        createCell(row, cellNum++, "User should be logged in successfully", dataStyle);
+        createCell(row, cellNum++, passed ? "Login successful" : "Login failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Reports Navigation Test Case
+     */
+    public void addReportsNavigationTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_REPORTS_NAV_001", dataStyle);
+        createCell(row, cellNum++, "Navigate to Reports Module", dataStyle);
+        createCell(row, cellNum++, "User navigates to Reports module from main menu", dataStyle);
+        createCell(row, cellNum++, 
+            "1. After successful login\n" +
+            "2. Click on Reports menu item (li[9])\n" +
+            "3. Wait for Reports page to load", dataStyle);
+        createCell(row, cellNum++, "XPath: /html/body/div[2]/div/div/div/ul/li[9]/a", dataStyle);
+        createCell(row, cellNum++, "Reports module should open successfully", dataStyle);
+        createCell(row, cellNum++, passed ? "Navigated to Reports successfully" : "Navigation failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Case Reports Generation Test Case
+     */
+    public void addCaseReportsGenerationTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_REPORTS_CASE_001", dataStyle);
+        createCell(row, cellNum++, "Generate Case Reports with Recovery, Expenses, and Assets", dataStyle);
+        createCell(row, cellNum++, "User generates comprehensive case reports including recovery, expenses, and asset details", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Reports module\n" +
+            "2. Select Template Report Name dropdown\n" +
+            "3. Select Include checkbox for cases\n" +
+            "4. Click Recovery section\n" +
+            "5. Select All Recovery checkbox\n" +
+            "6. Click Generate Case Report\n" +
+            "7. Click Case Expenses section\n" +
+            "8. Select All Case Expenses checkbox\n" +
+            "9. Click Generate Case Report\n" +
+            "10. Click Asset section\n" +
+            "11. Select Asset Include checkbox\n" +
+            "12. Click Generate Case Report", dataStyle);
+        createCell(row, cellNum++, 
+            "Template Dropdown: //*[@id='ReportTemplatesDD']\n" +
+            "Include: //*[@id='Caseselectall']\n" +
+            "Recovery: //*[@id='lnkRecovery']\n" +
+            "All Recovery: //*[@id='caseRecoverySelectAll']\n" +
+            "Case Expenses: //*[@id='lnkCaseExpense']\n" +
+            "All Expenses: //*[@id='CaseExpensesSelectall']\n" +
+            "Asset: //*[@id='lnkAsset']\n" +
+            "Asset Include: //*[@id='case_AllAssetDetails']\n" +
+            "Generate: //*[@id='SubmitReport']", dataStyle);
+        createCell(row, cellNum++, "Case reports should be generated successfully with all sections", dataStyle);
+        createCell(row, cellNum++, passed ? "Case reports generated successfully" : "Report generation failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Team Ownership Report Test Case
+     */
+    public void addTeamOwnershipReportTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_REPORTS_TEAM_001", dataStyle);
+        createCell(row, cellNum++, "Generate Team Case Ownership Report", dataStyle);
+        createCell(row, cellNum++, "User generates team-based case ownership report after reset", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Reports module\n" +
+            "2. Click Reset button\n" +
+            "3. Select Template Report Name dropdown\n" +
+            "4. Click Team case ownership filter\n" +
+            "5. Click Generate Case Report", dataStyle);
+        createCell(row, cellNum++, 
+            "Reset: //*[@id='reset']\n" +
+            "Template Dropdown: //*[@id='ReportTemplatesDD']\n" +
+            "Team Filter: //*[@id='Team']\n" +
+            "Generate: //*[@id='SubmitReport']", dataStyle);
+        createCell(row, cellNum++, "Team ownership report should be generated successfully", dataStyle);
+        createCell(row, cellNum++, passed ? "Team report generated successfully" : "Report generation failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Notice Reports Generation Test Case
+     */
+    public void addNoticeReportsGenerationTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_REPORTS_NOTICE_001", dataStyle);
+        createCell(row, cellNum++, "Generate Notice Reports with Recovery and Proceedings", dataStyle);
+        createCell(row, cellNum++, "User generates notice reports including recovery and proceedings sections", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Reports module\n" +
+            "2. Click Notice checkbox\n" +
+            "3. Select Template Report Name dropdown\n" +
+            "4. Click Include all for notices\n" +
+            "5. Select all notice recovery checkbox\n" +
+            "6. Click Generate Notice Report\n" +
+            "7. Click Notice Proceedings section\n" +
+            "8. Select all Notice Proceedings checkbox\n" +
+            "9. Click Generate Notice Report", dataStyle);
+        createCell(row, cellNum++, 
+            "Notice Checkbox: //*[@id='NoticeAll']\n" +
+            "Template: //*[@id='ReportTemplatesDD']\n" +
+            "Include All: //*[@id='Noticeselectall']\n" +
+            "Recovery All: //*[@id='noticeRecoverySelectAll']\n" +
+            "Proceedings: //*[@id='lnknoticeproceedings']\n" +
+            "Proceedings All: //*[@id='NoticeProceedingsSelectall']\n" +
+            "Generate: //*[@id='SubmitReport']", dataStyle);
+        createCell(row, cellNum++, "Notice reports should be generated with recovery and proceedings data", dataStyle);
+        createCell(row, cellNum++, passed ? "Notice reports generated successfully" : "Report generation failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Notice Team Ownership Report Test Case
+     */
+    public void addNoticeTeamOwnershipReportTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_REPORTS_NOTICE_TEAM_001", dataStyle);
+        createCell(row, cellNum++, "Generate Notice Team Ownership Report", dataStyle);
+        createCell(row, cellNum++, "User generates team ownership report for notices", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Reports module\n" +
+            "2. Click Notice checkbox\n" +
+            "3. Select Template Report Name dropdown\n" +
+            "4. Click Notice Team ownership filter\n" +
+            "5. Click Generate Notice Report", dataStyle);
+        createCell(row, cellNum++, 
+            "Notice Checkbox: //*[@id='NoticeAll']\n" +
+            "Template: //*[@id='ReportTemplatesDD']\n" +
+            "Team Filter: //*[@id='Team']\n" +
+            "Generate: //*[@id='SubmitReport']", dataStyle);
+        createCell(row, cellNum++, "Notice team ownership report should be generated", dataStyle);
+        createCell(row, cellNum++, passed ? "Notice team report generated successfully" : "Report generation failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Customer Report Switch Test Case
+     */
+    public void addCustomerReportSwitchTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_REPORTS_CUSTOMER_001", dataStyle);
+        createCell(row, cellNum++, "Switch to Customer Report Section", dataStyle);
+        createCell(row, cellNum++, "User switches to customer report section after reset", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Reports module\n" +
+            "2. Click Reset button\n" +
+            "3. Click Customer radio button", dataStyle);
+        createCell(row, cellNum++, 
+            "Reset: //*[@id='reset']\n" +
+            "Customer Radio: //*[@id='CustomerAll']", dataStyle);
+        createCell(row, cellNum++, "Customer report section should be displayed", dataStyle);
+        createCell(row, cellNum++, passed ? "Switched to customer section successfully" : "Switch failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
+    
+    /**
+     * Add Reports End to End Test Case
+     */
+    public void addReportsEndToEndTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        
+        createCell(row, cellNum++, "TC_REPORTS_E2E_001", dataStyle);
+        createCell(row, cellNum++, "Generate All Types of Reports End to End", dataStyle);
+        createCell(row, cellNum++, "User generates all report types in a complete workflow", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Reports module\n" +
+            "2. Generate Case Reports (Recovery, Expenses, Assets)\n" +
+            "3. Click Reset and generate Team Ownership Report\n" +
+            "4. Switch to Notice checkbox\n" +
+            "5. Generate Notice Reports (Recovery, Proceedings)\n" +
+            "6. Generate Notice Team Ownership Report\n" +
+            "7. Click Reset and switch to Customer section", dataStyle);
+        createCell(row, cellNum++, "All XPaths used across previous test cases", dataStyle);
+        createCell(row, cellNum++, "All report types should be generated successfully", dataStyle);
+        createCell(row, cellNum++, passed ? "All reports workflow completed" : "Workflow failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Test failed - check logs", dataStyle);
+    }
     
     /**
      * Main method to generate sample test case document

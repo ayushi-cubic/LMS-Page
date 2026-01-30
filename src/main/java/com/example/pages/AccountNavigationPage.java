@@ -15,7 +15,7 @@ public class AccountNavigationPage {
     private final WebDriver driver;
     private final WaitHelper waitHelper;
     
-    // Navigation Locators
+    // Navigation Locators - Using original working XPaths
     @FindBy(xpath = "/html/body/div[3]/div/div/div/ul/li[2]/a")
     private WebElement borrowersMenu;
     

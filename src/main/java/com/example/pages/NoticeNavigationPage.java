@@ -39,18 +39,33 @@ public class NoticeNavigationPage {
      * Click on Matters menu
      */
     public void clickMattersMenu() {
-        waitHelper.waitForElementClickable(mattersMenu);
-        mattersMenu.click();
-        System.out.println("✓ Clicked on Matters menu");
+        System.out.println("NoticeNavigationPage: Clicking Matters menu (li[3])");
+        try {
+            Thread.sleep(2000);
+            waitHelper.waitForElementClickable(mattersMenu);
+            mattersMenu.click();
+            Thread.sleep(1000);
+            System.out.println("NoticeNavigationPage: Matters menu clicked successfully");
+        } catch (Exception e) {
+            System.err.println("NoticeNavigationPage: Failed to click Matters menu - " + e.getMessage());
+            throw new RuntimeException("Failed to click Matters menu: " + e.getMessage());
+        }
     }
     
     /**
      * Click on Notice submenu
      */
     public void clickNoticeSubmenu() {
-        waitHelper.waitForElementClickable(noticeSubmenu);
-        noticeSubmenu.click();
-        System.out.println("✓ Clicked on Notice submenu");
+        System.out.println("NoticeNavigationPage: Clicking Notice submenu (li[3]/ul/li[2])");
+        try {
+            waitHelper.waitForElementClickable(noticeSubmenu);
+            noticeSubmenu.click();
+            Thread.sleep(1000);
+            System.out.println("NoticeNavigationPage: Notice submenu clicked successfully");
+        } catch (Exception e) {
+            System.err.println("NoticeNavigationPage: Failed to click Notice submenu - " + e.getMessage());
+            throw new RuntimeException("Failed to click Notice submenu: " + e.getMessage());
+        }
     }
     
     /**
