@@ -60,7 +60,7 @@ public class Hooks {
                 System.out.println("\nGenerating Excel test case document...");
                 ExcelTestCaseGenerator generator;
                 
-                // Check if this is Account, Asset, Customer, Notice or NoticeCriminal module
+                // Check if this is Account, Asset, Customer, Contact, Notice or NoticeCriminal module
                 if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("AccountManagement"))) {
                     generator = new ExcelTestCaseGenerator("Account Test Cases");
                     generator.createHeader();
@@ -86,6 +86,21 @@ public class Hooks {
                         java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".xlsx";
                     generator.saveToFile(filePath);
                     System.out.println("Excel file generated successfully: " + filePath);
+                } else if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("ContactManagement"))) {
+                    // Generate Contact Excel
+                    generator = new ExcelTestCaseGenerator("Contact Test Cases");
+                    generator.createHeader();
+                    generator.addContactNavigationTestCase(true);
+                    generator.addFirmContactCreationTestCase(true, "Firm" + System.currentTimeMillis());
+                    generator.addIndividualContactCreationTestCase(true, "John Doe");
+                    generator.addEmployeeContactCreationTestCase(true, "Employee" + System.currentTimeMillis());
+                    generator.addOtherPartyContactCreationTestCase(true, "Party" + System.currentTimeMillis());
+                    generator.addEmployeeEditTestCase(true, "Employee" + System.currentTimeMillis(), "EMP" + System.currentTimeMillis());
+                    generator.addOtherPartyEditTestCase(true, "Party" + System.currentTimeMillis(), "Manager");
+                    String filePath = "Contact_Test_Cases_" + 
+                        java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".xlsx";
+                    generator.saveToFile(filePath);
+                    System.out.println("Excel file generated successfully: " + filePath);
                 } else if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("NoticeCriminalManagement"))) {
                     // Generate Criminal Notice Excel
                     System.out.println("Generating Criminal Notice test case Excel...");
@@ -96,6 +111,22 @@ public class Hooks {
                     System.out.println("Generating Notice test case Excel...");
                     com.example.GenerateExcelNoticeDetails.main(null);
                     System.out.println("Notice Excel test case file generated successfully");
+                } else if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("ReportsManagement"))) {
+                    // Generate Reports Excel
+                    generator = new ExcelTestCaseGenerator("Reports Test Cases");
+                    generator.createHeader();
+                    generator.addReportsLoginTestCase(true);
+                    generator.addReportsNavigationTestCase(true);
+                    generator.addCaseReportsGenerationTestCase(true);
+                    generator.addTeamOwnershipReportTestCase(true);
+                    generator.addNoticeReportsGenerationTestCase(true);
+                    generator.addNoticeTeamOwnershipReportTestCase(true);
+                    generator.addCustomerReportSwitchTestCase(true);
+                    generator.addReportsEndToEndTestCase(true);
+                    String filePath = "Reports_Test_Cases_" + 
+                        java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".xlsx";
+                    generator.saveToFile(filePath);
+                    System.out.println("Excel file generated successfully: " + filePath);
                 } else {
                     // Default to Customer
                     generator = new ExcelTestCaseGenerator("Customer Test Cases");
@@ -136,6 +167,16 @@ public class Hooks {
                 
                 // Additional settings to prevent popups
                 put("profile.default_content_settings.popups", 0);
+                
+                // Enable automatic downloads without confirmation
+                put("download.default_directory", System.getProperty("user.dir") + File.separator + "downloads");
+                put("download.prompt_for_download", false);
+                put("download.directory_upgrade", true);
+                put("safebrowsing.enabled", false);
+                put("safebrowsing.disable_download_protection", true);
+                
+                // Allow multiple automatic downloads
+                put("profile.default_content_setting_values.automatic_downloads", 1);
             }});
             
             // Uncomment for headless mode

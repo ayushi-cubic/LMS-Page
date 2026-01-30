@@ -16,7 +16,7 @@ public class CustomerNavigationPage {
     private final WebDriver driver;
     private final WaitHelper waitHelper;
     
-    // Locators
+    // Locators - Using original working XPaths
     private final By borrowersMenu = By.xpath("/html/body/div[3]/div/div/div/ul/li[2]/a");
     private final By customerSubmenu = By.xpath("/html/body/div[3]/div/div/div/ul/li[2]/ul/li[3]/a");
     private final By addNewCustomerButton = By.xpath("/html/body/div[2]/div/main/div/div/main/div/div[2]/div[1]/div/div[1]/div[2]/div/div[3]/a");
@@ -41,14 +41,34 @@ public class CustomerNavigationPage {
      * Click Borrowers menu
      */
     public void clickBorrowersMenu() {
-        waitHelper.clickWithWait(borrowersMenu);
+        System.out.println("CustomerNavigationPage: Clicking Borrowers menu");
+        try {
+            // Wait for page to stabilize after login
+            Thread.sleep(2000);
+            
+            // Try to find and click Borrowers menu
+            waitHelper.clickWithWait(borrowersMenu);
+            System.out.println("CustomerNavigationPage: Borrowers menu clicked successfully");
+            Thread.sleep(1000); // Wait for submenu to appear
+        } catch (Exception e) {
+            System.err.println("CustomerNavigationPage: Failed to click Borrowers menu - " + e.getMessage());
+            throw new RuntimeException("Failed to click Borrowers menu: " + e.getMessage());
+        }
     }
     
     /**
      * Click Customer submenu
      */
     public void clickCustomerSubmenu() {
-        waitHelper.clickWithWait(customerSubmenu);
+        System.out.println("CustomerNavigationPage: Clicking Customer submenu (li[3])");
+        try {
+            waitHelper.clickWithWait(customerSubmenu);
+            System.out.println("CustomerNavigationPage: Customer submenu clicked successfully");
+            Thread.sleep(1000); // Wait for page to load
+        } catch (Exception e) {
+            System.err.println("CustomerNavigationPage: Failed to click Customer submenu - " + e.getMessage());
+            throw new RuntimeException("Failed to click Customer submenu: " + e.getMessage());
+        }
     }
     
     /**
