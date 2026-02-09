@@ -5,7 +5,7 @@ Feature: Civil Case Creation Management
   So that I can manage civil case records efficiently
 
   @CivilCaseCreationScenario
-  Scenario: Create a new civil case and verify it
+  Scenario: Create a new civil case and verify it with approval workflow
     Given I am logged into the LMS application for civil case creation
     When I click on Matters menu
     And I click on Case submenu
@@ -31,8 +31,24 @@ Feature: Civil Case Creation Management
     And I click Next for Important Dates
     And I click Next for Contingent Liability
     And I click Save button for civil case
-    And I capture the System ID
-    And I click Back button
-    And I search for the captured System ID
-    And I click Action button
-    Then I click Details link
+    And I capture the Case ID
+    And I click user dropdown
+    And I click Logout
+    And I login as "Ajinkya" with password "pass@123" and OTP "123456"
+    And I click Actionable Items
+    And I click Approval tab
+    And I click Advocate Allocation Approval
+    And I click Advance Filter
+    And I click Apply button
+    And I click Last page
+    And I click case checkbox
+    And I click Approve button
+    And I accept the alert
+    And I click user dropdown
+    And I click Logout
+    And I login as "ayushi" with password "Legal@1234" and OTP "123456"
+    When I click on Matters menu
+    And I click on Case submenu
+    And I click Load Cases button
+    And I click Action dropdown
+    Then I click Details link from action

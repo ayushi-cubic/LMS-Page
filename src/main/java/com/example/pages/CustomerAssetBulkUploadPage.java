@@ -198,11 +198,41 @@ public class CustomerAssetBulkUploadPage {
     }
     
     /**
+     * Clear old template files from downloads folder to avoid numbered duplicates
+     */
+    private void clearOldAssetTemplates() {
+        try {
+            File dir = new File(downloadFolder);
+            File[] files = dir.listFiles((d, name) -> 
+                name.contains("Security") && name.endsWith(".xlsx") && 
+                !name.contains("AssetBulkUpload_") && !name.contains("Report"));
+            
+            if (files != null && files.length > 0) {
+                System.out.println("Clearing " + files.length + " old asset template files...");
+                for (File file : files) {
+                    if (file.delete()) {
+                        System.out.println("  Deleted: " + file.getName());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Warning: Could not clear old templates: " + e.getMessage());
+        }
+    }
+    
+    /**
      * Click Download Excel Format button
      */
     public void clickDownloadExcelFormat() {
         try {
             System.out.println("Clicking Download Excel Format button...");
+            
+            // Clear old template files first
+            clearOldAssetTemplates();
+            
+            // Wait for button to be enabled
+            Thread.sleep(2000);
+            
             waitHelper.waitForElementClickable(downloadExcelButton);
             
             // Try regular click first
@@ -215,6 +245,8 @@ public class CustomerAssetBulkUploadPage {
                 System.out.println("Download button clicked using JavaScript");
             }
             
+            // Give time for download to start
+            Thread.sleep(2000);
             System.out.println("Download button clicked successfully");
         } catch (Exception e) {
             System.err.println("Error clicking download button: " + e.getMessage());
@@ -332,14 +364,14 @@ public class CustomerAssetBulkUploadPage {
             
             fis.close();
             
-            // Save updated file
-            updatedFilePath = downloadFolder + File.separator + "CustomerAssetBulkUpload_" + System.currentTimeMillis() + ".xlsx";
+            // Save updated file directly to the downloaded file (overwrite)
+            updatedFilePath = filePath;
             FileOutputStream fos = new FileOutputStream(updatedFilePath);
             workbook.write(fos);
             fos.close();
             workbook.close();
             
-            System.out.println("Excel file updated and saved: " + updatedFilePath);
+            System.out.println("Excel file updated and saved to downloaded file: " + updatedFilePath);
             return updatedFilePath;
             
         } catch (Exception e) {
@@ -359,11 +391,21 @@ public class CustomerAssetBulkUploadPage {
         // Fill all the data specified by the user for Customer Asset bulk upload
         // Using lowercase keys for case-insensitive matching with Excel headers
         
+        System.out.println("\n=== Generated Customer Asset Test Data ===");
+        System.out.println("Asset Nature: Movable");
+        System.out.println("Type: Primary");
+        System.out.println("Asset Category: New Category");
+        System.out.println("Asset Name: New asset");
+        System.out.println("Account Number: ayushi645311");
+        System.out.println("==========================================\n");
+        
         data.put("asset nature", "Movable");
         data.put("type", "Primary");
         data.put("asset category", "New Category");
         data.put("asset name", "New asset");
         data.put("account number", "ayushi645311");
+        data.put("estimated value", "500000");
+        data.put("description", "Movable asset for testing");
         
         // All other columns not mentioned will remain empty as per requirement
         

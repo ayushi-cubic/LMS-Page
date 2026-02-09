@@ -23,6 +23,7 @@ public class CivilCaseCreationStepDefinitions {
     private OtpPage otpPage;
     private CivilCaseCreationPage civilCaseCreationPage;
     private String capturedSystemId;
+    private String capturedCaseId;
     
     // Constructor - WebDriver will be retrieved from Hooks
     public CivilCaseCreationStepDefinitions() {
@@ -166,6 +167,88 @@ public class CivilCaseCreationStepDefinitions {
     @And("I click Save button for civil case")
     public void iClickSaveButtonForCivilCase() {
         civilCaseCreationPage.clickSave();
+    }
+    
+    @And("I capture the Case ID")
+    public void iCapturetheCaseId() {
+        capturedCaseId = civilCaseCreationPage.captureCaseId();
+        Assertions.assertNotNull(capturedCaseId, "Case ID should be captured");
+        System.out.println("Captured Case ID: " + capturedCaseId);
+    }
+    
+    @And("I click user dropdown")
+    public void iClickUserDropdown() {
+        civilCaseCreationPage.clickUserDropdown();
+    }
+    
+    @And("I click Logout")
+    public void iClickLogout() {
+        civilCaseCreationPage.clickLogout();
+    }
+    
+    @And("I login as {string} with password {string} and OTP {string}")
+    public void iLoginAsWithPasswordAndOTP(String username, String password, String otp) {
+        civilCaseCreationPage.loginAs(username, password, otp);
+    }
+    
+    @And("I click Actionable Items")
+    public void iClickActionableItems() {
+        civilCaseCreationPage.clickActionableItems();
+    }
+    
+    @And("I click Approval tab")
+    public void iClickApprovalTab() {
+        civilCaseCreationPage.clickApprovalTab();
+    }
+    
+    @And("I click Advocate Allocation Approval")
+    public void iClickAdvocateAllocationApproval() {
+        civilCaseCreationPage.clickAdvocateAllocationApproval();
+    }
+    
+    @And("I click Advance Filter")
+    public void iClickAdvanceFilter() {
+        civilCaseCreationPage.clickAdvanceFilter();
+    }
+    
+    @And("I click Apply button")
+    public void iClickApplyButton() {
+        civilCaseCreationPage.clickApply();
+    }
+    
+    @And("I click Last page")
+    public void iClickLastPage() {
+        civilCaseCreationPage.clickLastPage();
+    }
+    
+    @And("I click case checkbox")
+    public void iClickCaseCheckbox() {
+        civilCaseCreationPage.clickCaseCheckbox();
+    }
+    
+    @And("I click Approve button")
+    public void iClickApproveButton() {
+        civilCaseCreationPage.clickApprove();
+    }
+    
+    @And("I accept the alert")
+    public void iAcceptTheAlert() {
+        civilCaseCreationPage.acceptAlert();
+    }
+    
+    @And("I click Load Cases button")
+    public void iClickLoadCasesButton() {
+        civilCaseCreationPage.clickLoadCases();
+    }
+    
+    @And("I click Action dropdown")
+    public void iClickActionDropdown() {
+        civilCaseCreationPage.clickActionDropdown();
+    }
+    
+    @And("I click Details link from action")
+    public void iClickDetailsLinkFromAction() {
+        civilCaseCreationPage.clickDetailsLink();
     }
     
     @And("I capture the System ID")

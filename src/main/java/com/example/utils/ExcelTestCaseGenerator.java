@@ -1013,6 +1013,340 @@ public class ExcelTestCaseGenerator {
     }
     
     /**
+     * Add Bulk Upload Login test case
+     */
+    public void addBulkUploadLoginTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_01", dataStyle);
+        createCell(row, cellNum++, "Login to LMS Application for Bulk Upload", dataStyle);
+        createCell(row, cellNum++, "Verify user can login successfully for bulk upload operations", dataStyle);
+        createCell(row, cellNum++, "Valid username and password", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to https://qalmsbu.cubictree.com/\n" +
+            "2. Enter username: ayushi\n" +
+            "3. Enter password: Legal@1234\n" +
+            "4. Enter OTP: 123456\n" +
+            "5. Click Login button", dataStyle);
+        createCell(row, cellNum++, "Login page URL, username, password fields, OTP field", dataStyle);
+        createCell(row, cellNum++, "User should be logged in successfully and redirected to dashboard", dataStyle);
+        createCell(row, cellNum++, passed ? "Login successful, dashboard loaded" : "Login failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Login failed", dataStyle);
+    }
+    
+    /**
+     * Add Customer Bulk Upload test case
+     */
+    public void addCustomerBulkUploadTestCase(boolean passed, String customerNumber, String customerName) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_02", dataStyle);
+        createCell(row, cellNum++, "Customer Bulk Upload", dataStyle);
+        createCell(row, cellNum++, "Download customer template, fill with data, and upload", dataStyle);
+        createCell(row, cellNum++, 
+            "Customer Number: " + customerNumber + "\n" +
+            "Customer Name: " + customerName + "\n" +
+            "Father Name: Rajesh Kumar\n" +
+            "Customer Type: Individual\n" +
+            "Business Unit: CTQA\n" +
+            "Zone: West\n" +
+            "State: Maharashtra\n" +
+            "Location: Mumbai\n" +
+            "Trust Name: ABC\n" +
+            "Trust Code: TR002", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Bulk Upload page\n" +
+            "2. Select Upload Type as 'Customers'\n" +
+            "3. Select Customer Type as 'Customer'\n" +
+            "4. Click Download Excel Format\n" +
+            "5. Fill downloaded Excel with customer data\n" +
+            "6. Upload filled Excel file\n" +
+            "7. Click Upload button", dataStyle);
+        createCell(row, cellNum++, "Upload page, dropdowns, download button, file input, upload button", dataStyle);
+        createCell(row, cellNum++, "Customer data should be uploaded successfully", dataStyle);
+        createCell(row, cellNum++, passed ? "Upload successful with all customer data" : "Upload failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Upload failed - check data format", dataStyle);
+    }
+    
+    /**
+     * Add Customer Asset Bulk Upload test case
+     */
+    public void addCustomerAssetBulkUploadTestCase(boolean passed, String assetName, String accountNumber) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_03", dataStyle);
+        createCell(row, cellNum++, "Customer Asset Bulk Upload", dataStyle);
+        createCell(row, cellNum++, "Download customer asset template, fill with data, and upload", dataStyle);
+        createCell(row, cellNum++, 
+            "Asset Nature: Movable\n" +
+            "Type: Primary\n" +
+            "Asset Category: New Category\n" +
+            "Asset Name: " + assetName + "\n" +
+            "Account Number: " + accountNumber + "\n" +
+            "Estimated Value: 500000\n" +
+            "Description: Movable asset for testing", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Bulk Upload page\n" +
+            "2. Select Upload Type as 'Customers'\n" +
+            "3. Select Customer Type as 'Customer Securities'\n" +
+            "4. Click Download Excel Format\n" +
+            "5. Fill downloaded Excel with asset data\n" +
+            "6. Upload filled Excel file\n" +
+            "7. Click Upload button", dataStyle);
+        createCell(row, cellNum++, "Upload page, dropdowns, download button, file input, upload button", dataStyle);
+        createCell(row, cellNum++, "Customer asset data should be uploaded successfully", dataStyle);
+        createCell(row, cellNum++, passed ? "Upload successful with all asset data" : "Upload failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Upload failed - check data format", dataStyle);
+    }
+    
+    /**
+     * Add Customer Account Bulk Upload test case
+     */
+    public void addCustomerAccountBulkUploadTestCase(boolean passed, String accountNumber, String customerNumber) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_04", dataStyle);
+        createCell(row, cellNum++, "Customer Account Bulk Upload", dataStyle);
+        createCell(row, cellNum++, "Download customer account template, fill with data, and upload", dataStyle);
+        createCell(row, cellNum++, 
+            "Account Number: " + accountNumber + "\n" +
+            "Customer Number: " + customerNumber + "\n" +
+            "Facility: Saving account\n" +
+            "Principal Amount: 100000\n" +
+            "Interest Rate: 3%\n" +
+            "Outstanding Balance: 10000\n" +
+            "Business Unit: CTQA\n" +
+            "Zone: West\n" +
+            "State: Maharashtra\n" +
+            "Location: Akola\n" +
+            "Account Status: Live\n" +
+            "Dates: Agreement(03.08.2025), Disbursal(05.08.2025), Maturity(06.08.2025)", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Navigate to Bulk Upload page\n" +
+            "2. Select Upload Type as 'Customers'\n" +
+            "3. Click Download Excel Format for accounts\n" +
+            "4. Fill downloaded Excel with account data\n" +
+            "5. Upload filled Excel file\n" +
+            "6. Click Upload button", dataStyle);
+        createCell(row, cellNum++, "Upload page, dropdowns, download button, file input, upload button", dataStyle);
+        createCell(row, cellNum++, "Customer account data should be uploaded successfully", dataStyle);
+        createCell(row, cellNum++, passed ? "Upload successful with all account data" : "Upload failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Upload failed - check data format", dataStyle);
+    }
+    
+    /**
+     * Add Navigation to Bulk Upload Page test case
+     */
+    public void addBulkUploadNavigationTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_NAV_01", dataStyle);
+        createCell(row, cellNum++, "Navigate to Bulk Upload Page", dataStyle);
+        createCell(row, cellNum++, "Verify user can navigate to Bulk Upload page from dashboard", dataStyle);
+        createCell(row, cellNum++, "User logged in, Dashboard loaded", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Locate Bulk Upload menu link\n" +
+            "2. Click on Bulk Upload menu\n" +
+            "3. Wait for page to load\n" +
+            "4. Verify URL contains '/Uploads/Index'", dataStyle);
+        createCell(row, cellNum++, "Bulk Upload menu link, URL verification", dataStyle);
+        createCell(row, cellNum++, "Bulk Upload page should load with upload options visible", dataStyle);
+        createCell(row, cellNum++, passed ? "Navigation successful, upload page loaded" : "Navigation failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Failed to navigate", dataStyle);
+    }
+    
+    /**
+     * Add Select Upload Type test case
+     */
+    public void addSelectUploadTypeTestCase(boolean passed, String uploadType) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_SELECT_01", dataStyle);
+        createCell(row, cellNum++, "Select Upload Type - " + uploadType, dataStyle);
+        createCell(row, cellNum++, "Verify user can select upload type from dropdown", dataStyle);
+        createCell(row, cellNum++, "Upload Type: " + uploadType, dataStyle);
+        createCell(row, cellNum++, 
+            "1. Locate Upload Type dropdown (id: Cmbname)\n" +
+            "2. Click dropdown to expand options\n" +
+            "3. Select '" + uploadType + "' from dropdown\n" +
+            "4. Verify selection is applied\n" +
+            "5. Wait for page to update", dataStyle);
+        createCell(row, cellNum++, "Upload Type dropdown, option selection", dataStyle);
+        createCell(row, cellNum++, uploadType + " should be selected and sub-type dropdown should load", dataStyle);
+        createCell(row, cellNum++, passed ? "Upload type selected: " + uploadType : "Selection failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Dropdown selection failed", dataStyle);
+    }
+    
+    /**
+     * Add Select Customer Type test case
+     */
+    public void addSelectCustomerTypeTestCase(boolean passed, String customerType) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_SELECT_02", dataStyle);
+        createCell(row, cellNum++, "Select Customer Type - " + customerType, dataStyle);
+        createCell(row, cellNum++, "Verify user can select customer type from sub-dropdown", dataStyle);
+        createCell(row, cellNum++, "Customer Type: " + customerType, dataStyle);
+        createCell(row, cellNum++, 
+            "1. Locate Customer Type dropdown (id: subuploadCusttype)\n" +
+            "2. Click dropdown to expand options\n" +
+            "3. Select '" + customerType + "' from dropdown\n" +
+            "4. Verify selection is applied\n" +
+            "5. Wait for download button to be enabled", dataStyle);
+        createCell(row, cellNum++, "Customer Type dropdown, option selection", dataStyle);
+        createCell(row, cellNum++, customerType + " should be selected and download button enabled", dataStyle);
+        createCell(row, cellNum++, passed ? "Customer type selected: " + customerType : "Selection failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Dropdown selection failed", dataStyle);
+    }
+    
+    /**
+     * Add Download Excel Template test case
+     */
+    public void addDownloadExcelTemplateTestCase(boolean passed, String templateName) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_DOWNLOAD_01", dataStyle);
+        createCell(row, cellNum++, "Download Excel Template - " + templateName, dataStyle);
+        createCell(row, cellNum++, "Verify Excel template downloads successfully", dataStyle);
+        createCell(row, cellNum++, "Template: " + templateName, dataStyle);
+        createCell(row, cellNum++, 
+            "1. Click 'Download Excel Format' button (id: btnstddownload)\n" +
+            "2. Wait for file download to start\n" +
+            "3. Monitor downloads folder for new file\n" +
+            "4. Verify file exists with correct name\n" +
+            "5. Verify file is valid Excel format", dataStyle);
+        createCell(row, cellNum++, "Download button, file system, downloads folder", dataStyle);
+        createCell(row, cellNum++, "Excel template should download to downloads folder", dataStyle);
+        createCell(row, cellNum++, passed ? "Template downloaded: " + templateName : "Download failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Download failed or timed out", dataStyle);
+    }
+    
+    /**
+     * Add Fill Excel with Data test case
+     */
+    public void addFillExcelWithDataTestCase(boolean passed, String dataType, int fieldsCount) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_FILL_01", dataStyle);
+        createCell(row, cellNum++, "Fill Excel with " + dataType + " Data", dataStyle);
+        createCell(row, cellNum++, "Verify data is correctly written to downloaded Excel template", dataStyle);
+        createCell(row, cellNum++, dataType + " data with " + fieldsCount + " fields", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Open downloaded Excel file using Apache POI\n" +
+            "2. Read header row to identify columns\n" +
+            "3. Create data row (row 2)\n" +
+            "4. Fill each column with appropriate test data\n" +
+            "5. Save changes to the same file\n" +
+            "6. Close workbook", dataStyle);
+        createCell(row, cellNum++, "Apache POI, Excel file, test data generator", dataStyle);
+        createCell(row, cellNum++, "All " + fieldsCount + " fields should be filled with valid data", dataStyle);
+        createCell(row, cellNum++, passed ? "Data written successfully to " + fieldsCount + " fields" : "Data fill failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Excel write failed", dataStyle);
+    }
+    
+    /**
+     * Add Upload Excel File test case
+     */
+    public void addUploadExcelFileTestCase(boolean passed, String fileName) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_UPLOAD_01", dataStyle);
+        createCell(row, cellNum++, "Upload Filled Excel File", dataStyle);
+        createCell(row, cellNum++, "Verify filled Excel file can be uploaded to the system", dataStyle);
+        createCell(row, cellNum++, "File: " + fileName, dataStyle);
+        createCell(row, cellNum++, 
+            "1. Locate file input element (id: Document)\n" +
+            "2. Send absolute file path to input element\n" +
+            "3. Wait for file to be attached\n" +
+            "4. Verify file name appears in UI\n" +
+            "5. Verify upload button is enabled", dataStyle);
+        createCell(row, cellNum++, "File input element, file path, upload button", dataStyle);
+        createCell(row, cellNum++, "File should be attached successfully and ready for upload", dataStyle);
+        createCell(row, cellNum++, passed ? "File attached: " + fileName : "File attachment failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "File upload failed", dataStyle);
+    }
+    
+    /**
+     * Add Click Upload Button test case
+     */
+    public void addClickUploadButtonTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_SUBMIT_01", dataStyle);
+        createCell(row, cellNum++, "Click Upload Button to Submit Data", dataStyle);
+        createCell(row, cellNum++, "Verify upload button click triggers data submission", dataStyle);
+        createCell(row, cellNum++, "Excel file attached, upload button enabled", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Locate upload button (id: btnuploaddoc)\n" +
+            "2. Wait for button to be clickable\n" +
+            "3. Click upload button (regular or JavaScript click)\n" +
+            "4. Wait for upload processing\n" +
+            "5. Monitor for response/feedback", dataStyle);
+        createCell(row, cellNum++, "Upload button, JavaScript executor", dataStyle);
+        createCell(row, cellNum++, "Upload button should be clicked and data submission initiated", dataStyle);
+        createCell(row, cellNum++, passed ? "Upload button clicked successfully" : "Button click failed", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Click action failed", dataStyle);
+    }
+    
+    /**
+     * Add Validate Upload Success test case
+     */
+    public void addValidateUploadSuccessTestCase(boolean passed) {
+        Row row = sheet.createRow(rowNum++);
+        int cellNum = 0;
+        createCell(row, cellNum++, "TC_BULK_VALIDATE_01", dataStyle);
+        createCell(row, cellNum++, "Validate Upload Success", dataStyle);
+        createCell(row, cellNum++, "Verify upload completed successfully with success message", dataStyle);
+        createCell(row, cellNum++, "Upload submitted, processing complete", dataStyle);
+        createCell(row, cellNum++, 
+            "1. Wait for page response after upload\n" +
+            "2. Look for success message element\n" +
+            "3. Check page text for success indicators\n" +
+            "4. Verify page source contains success keywords\n" +
+            "5. Confirm data was processed", dataStyle);
+        createCell(row, cellNum++, "Success message elements, page source, keywords", dataStyle);
+        createCell(row, cellNum++, "Success message should be displayed confirming upload", dataStyle);
+        createCell(row, cellNum++, passed ? "Upload validated successfully" : "Validation failed or no success message", dataStyle);
+        createCell(row, cellNum++, passed ? "PASS" : "FAIL", passed ? passStyle : failStyle);
+        createCell(row, cellNum++, "Automation", dataStyle);
+        createCell(row, cellNum++, getCurrentDateTime(), dataStyle);
+        createCell(row, cellNum++, passed ? "Test executed successfully" : "Success validation failed", dataStyle);
+    }
+    
+    /**
      * Main method to generate sample test case document
      */
     public static void main(String[] args) {

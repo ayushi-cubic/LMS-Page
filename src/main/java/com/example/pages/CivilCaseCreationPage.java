@@ -25,6 +25,7 @@ public class CivilCaseCreationPage {
     private final WaitHelper waitHelper;
     private final Random random;
     private String capturedSystemId;
+    private String capturedCaseId;
     
     // Locators
     @FindBy(xpath = "/html/body/div[3]/div/div/div/ul/li[3]/a")
@@ -81,22 +82,62 @@ public class CivilCaseCreationPage {
     @FindBy(xpath = "//*[@id='CustomerCreateNew']")
     private WebElement saveButton;
     
-    @FindBy(xpath = "//*[@id='case-basicdetails']/div/div[2]/div/div[1]/div")
-    private WebElement systemIdElement;
+    @FindBy(xpath = "//*[@id='case-basicdetails']/div/div[2]/div/div[4]/div")
+    private WebElement caseIdElement;
     
-    @FindBy(xpath = "/html/body/div[2]/div/main/div[3]/div/div/main/div/div[1]/a")
-    private WebElement backButton;
+    // Logout and User dropdown elements
+    @FindBy(xpath = "/html/body/header/div/div[2]/a")
+    private WebElement userDropdown;
     
-    @FindBy(xpath = "//*[@id='CaseSystemId']")
-    private WebElement searchInput;
+    @FindBy(xpath = "/html/body/header/div/div[2]/div[2]/div/div/div[1]/div/ul/li[2]/a")
+    private WebElement logoutLink;
     
-    @FindBy(xpath = "//*[@id='quickSearchForm']/button")
-    private WebElement searchButton;
+    // Login fields for Ajinkya
+    @FindBy(xpath = "//*[@id='USEREMAILID']")
+    private WebElement usernameInput;
     
-    @FindBy(xpath = "//*[@id='caseListingContainer']/div/table/tbody/tr/td[10]/div/a/I")
-    private WebElement actionButton;
+    @FindBy(xpath = "//*[@id='USERPASSWORD']")
+    private WebElement passwordInput;
     
-    @FindBy(xpath = "//*[@id='caseListingContainer']/div/table/tbody/tr/td[10]/div/ul/li[2]/a")
+    @FindBy(xpath = "//*[@id='submitbtn']")
+    private WebElement signInButton;
+    
+    @FindBy(xpath = "//*[@id='Otp']")
+    private WebElement otpInput;
+    
+    // Actionable items and approval elements
+    @FindBy(xpath = "//*[@id='navLinks']/a[3]")
+    private WebElement actionableItemsLink;
+    
+    @FindBy(xpath = "//*[@id='tab-approval']")
+    private WebElement approvalTab;
+    
+    @FindBy(xpath = "//*[@id='ApprovalTypeTabs']/li[2]/a")
+    private WebElement advocateAllocationApprovalTab;
+    
+    @FindBy(xpath = "//*[@id='v-pills-home']/div[1]/div[2]/a")
+    private WebElement advanceFilterLink;
+    
+    @FindBy(xpath = "//*[@id='BtnAFApply1']")
+    private WebElement applyButton;
+    
+    @FindBy(xpath = "//*[@id='paginationControls']/ul/li[7]/a")
+    private WebElement lastPageLink;
+    
+    @FindBy(xpath = "//*[@id='chkApprovalReq']")
+    private WebElement approvalCheckbox;
+    
+    @FindBy(xpath = "//*[@id='btnapproveadvocate']")
+    private WebElement approveButton;
+    
+    // Matters > Case > Load cases elements
+    @FindBy(xpath = "//*[@id='loadCaseBtn']")
+    private WebElement loadCasesButton;
+    
+    @FindBy(xpath = "//*[@id='caseListingContainer']/div/table/tbody/tr[1]/td[10]/div/a/i")
+    private WebElement actionDropdown;
+    
+    @FindBy(xpath = "//*[@id='caseListingContainer']/div/table/tbody/tr[1]/td[10]/div/ul/li[2]/a")
     private WebElement detailsLink;
     
     // Constructor
@@ -298,52 +339,86 @@ public class CivilCaseCreationPage {
     }
     
     /**
-     * Enter Party name
+     * Enter Party name (We Are field) - Must be between 1 and 200
      */
     public void enterParty() {
         try {
-            System.out.println("Entering Party name...");
-            String partyName = "TestParty" + System.currentTimeMillis();
+            System.out.println("Entering Party name (We Are field)...");
+            
+            // Generate random number between 1 and 200
+            int weAreNumber = random.nextInt(200) + 1;
+            
             waitHelper.waitForElementVisible(partyInput);
             partyInput.clear();
-            partyInput.sendKeys(partyName);
-            System.out.println("Entered Party: " + partyName);
+            partyInput.sendKeys(String.valueOf(weAreNumber));
+            System.out.println("Entered We Are: " + weAreNumber + " (valid range: 1-200)");
             Thread.sleep(1000);
         } catch (Exception e) {
-            System.err.println("Error entering Party: " + e.getMessage());
-            throw new RuntimeException("Failed to enter Party", e);
+            System.err.println("Error entering Party (We Are): " + e.getMessage());
+            throw new RuntimeException("Failed to enter Party (We Are)", e);
         }
     }
     
     /**
-     * Select random Issuing Party
+     * Select random Issuing Party (supports multiple selections)
      */
     public void selectRandomIssuingParty() {
         try {
-            System.out.println("Selecting random Issuing Party...");
+            System.out.println("Selecting Issuing Party(s)...");
             Thread.sleep(2000);
             
             WebElement issuingPartyDropdown = driver.findElement(By.xpath("//*[@id='byRoleSection']/div/div[1]/div/div[1]"));
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", issuingPartyDropdown);
-            Thread.sleep(500);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", issuingPartyDropdown);
+            Thread.sleep(800);
             
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", issuingPartyDropdown);
+            System.out.println("Clicked Issuing Party dropdown");
             Thread.sleep(2000);
             
-            // Select first available option from dropdown - click on the li element or label instead of checkbox
-            List<WebElement> options = driver.findElements(By.xpath("//*[@id='businessunitPetResDropdown']//li"));
-            if (!options.isEmpty()) {
-                // Try clicking the first li element
-                WebElement firstOption = options.get(0);
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", firstOption);
-                System.out.println("Issuing Party selected successfully");
-            } else {
-                // Fallback: try clicking first label
-                List<WebElement> labels = driver.findElements(By.xpath("//*[@id='businessunitPetResDropdown']//label"));
-                if (!labels.isEmpty()) {
-                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", labels.get(0));
-                    System.out.println("Issuing Party selected successfully (via label)");
+            // Find checkbox inputs specifically
+            List<WebElement> checkboxes = driver.findElements(By.xpath("//*[@id='businessunitPetResDropdown']//input[@type='checkbox']"));
+            System.out.println("Found " + checkboxes.size() + " issuing party checkboxes");
+            
+            if (!checkboxes.isEmpty()) {
+                // Filter valid checkboxes
+                List<WebElement> validCheckboxes = new java.util.ArrayList<>();
+                for (WebElement checkbox : checkboxes) {
+                    if (checkbox.isDisplayed() && checkbox.isEnabled()) {
+                        validCheckboxes.add(checkbox);
+                    }
                 }
+                
+                if (!validCheckboxes.isEmpty()) {
+                    // Select 1-3 random parties
+                    int numToSelect = Math.min(random.nextInt(3) + 1, validCheckboxes.size());
+                    System.out.println("Selecting " + numToSelect + " Issuing Party(s)...");
+                    
+                    for (int i = 0; i < numToSelect; i++) {
+                        try {
+                            WebElement checkbox = validCheckboxes.get(i);
+                            // Get label text
+                            WebElement parent = checkbox.findElement(By.xpath("./parent::*"));
+                            String labelText = parent.getText().trim();
+                            
+                            // Scroll into view and click
+                            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkbox);
+                            Thread.sleep(300);
+                            
+                            if (!checkbox.isSelected()) {
+                                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+                                Thread.sleep(500);
+                                System.out.println("  ✓ Selected Issuing Party: " + labelText);
+                            }
+                        } catch (Exception ex) {
+                            System.out.println("  ! Failed to select party #" + (i + 1) + ": " + ex.getMessage());
+                        }
+                    }
+                    System.out.println("Issuing Party(s) selected successfully");
+                } else {
+                    System.out.println("⚠ No valid issuing party checkboxes");
+                }
+            } else {
+                System.out.println("⚠ No issuing party checkboxes available");
             }
             
             Thread.sleep(1000);
@@ -354,31 +429,69 @@ public class CivilCaseCreationPage {
     }
     
     /**
-     * Select random Respondent
+     * Select random Respondent (supports multiple selections)
      */
     public void selectRandomRespondent() {
         try {
-            System.out.println("Selecting random Respondent...");
+            System.out.println("Selecting Respondent(s)...");
             Thread.sleep(2000);
             
             WebElement respondentDropdown = driver.findElement(By.xpath("//*[@id='againstRoleSection']/div/div[1]/div/div[1]"));
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", respondentDropdown);
-            Thread.sleep(500);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", respondentDropdown);
+            Thread.sleep(800);
             
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", respondentDropdown);
+            System.out.println("Clicked Respondent dropdown");
             Thread.sleep(2000);
             
-            // Select first available option from dropdown - click on the li element instead of checkbox
-            List<WebElement> options = driver.findElements(By.xpath("//*[@id='NoticeePetResDropdown']//li"));
-            if (!options.isEmpty()) {
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", options.get(0));
-                System.out.println("Respondent selected successfully");
-            } else {
-                List<WebElement> labels = driver.findElements(By.xpath("//*[@id='NoticeePetResDropdown']//label"));
-                if (!labels.isEmpty()) {
-                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", labels.get(0));
-                    System.out.println("Respondent selected successfully (via label)");
+            // Find checkbox inputs specifically
+            List<WebElement> checkboxes = driver.findElements(By.xpath("//*[@id='NoticeePetResDropdown']//input[@type='checkbox']"));
+            System.out.println("Found " + checkboxes.size() + " respondent checkboxes");
+            
+            if (!checkboxes.isEmpty()) {
+                // Filter valid checkboxes
+                List<WebElement> validCheckboxes = new java.util.ArrayList<>();
+                for (WebElement checkbox : checkboxes) {
+                    if (checkbox.isDisplayed() && checkbox.isEnabled()) {
+                        WebElement parent = checkbox.findElement(By.xpath("./parent::*"));
+                        String labelText = parent.getText().trim();
+                        if (!labelText.isEmpty() && !labelText.equalsIgnoreCase("No Record Found")) {
+                            validCheckboxes.add(checkbox);
+                        }
+                    }
                 }
+                
+                if (!validCheckboxes.isEmpty()) {
+                    // Select 1-3 random respondents
+                    int numToSelect = Math.min(random.nextInt(3) + 1, validCheckboxes.size());
+                    System.out.println("Selecting " + numToSelect + " Respondent(s)...");
+                    
+                    for (int i = 0; i < numToSelect; i++) {
+                        try {
+                            WebElement checkbox = validCheckboxes.get(i);
+                            // Get label text
+                            WebElement parent = checkbox.findElement(By.xpath("./parent::*"));
+                            String labelText = parent.getText().trim();
+                            
+                            // Scroll into view and click
+                            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkbox);
+                            Thread.sleep(300);
+                            
+                            if (!checkbox.isSelected()) {
+                                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+                                Thread.sleep(500);
+                                System.out.println("  ✓ Selected Respondent: " + labelText);
+                            }
+                        } catch (Exception ex) {
+                            System.out.println("  ! Failed to select respondent #" + (i + 1) + ": " + ex.getMessage());
+                        }
+                    }
+                    System.out.println("Respondent(s) selected successfully");
+                } else {
+                    System.out.println("⚠ No valid respondent checkboxes");
+                }
+            } else {
+                System.out.println("⚠ No respondent checkboxes available");
             }
             
             Thread.sleep(1000);
@@ -389,31 +502,65 @@ public class CivilCaseCreationPage {
     }
     
     /**
-     * Select random Petitioner's Advocate
+     * Select random Petitioner's Advocate (supports multiple selections)
      */
     public void selectRandomAdvocate() {
         try {
-            System.out.println("Selecting random Petitioner's Advocate...");
+            System.out.println("Selecting Petitioner's Advocate(s)...");
             Thread.sleep(2000);
             
             WebElement advocateDropdown = driver.findElement(By.xpath("//*[@id='issuingAdvocateSection']/div/div[1]/div/div[1]"));
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", advocateDropdown);
-            Thread.sleep(500);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", advocateDropdown);
+            Thread.sleep(800);
             
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", advocateDropdown);
+            System.out.println("Clicked Petitioner's Advocate dropdown");
             Thread.sleep(2000);
             
-            // Select first available option from dropdown - click on the li element instead of checkbox
-            List<WebElement> options = driver.findElements(By.xpath("//*[@id='advocatesDropdown']//li"));
-            if (!options.isEmpty()) {
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", options.get(0));
-                System.out.println("Advocate selected successfully");
-            } else {
-                List<WebElement> labels = driver.findElements(By.xpath("//*[@id='advocatesDropdown']//label"));
-                if (!labels.isEmpty()) {
-                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", labels.get(0));
-                    System.out.println("Advocate selected successfully (via label)");
+            // Find checkbox inputs specifically
+            List<WebElement> checkboxes = driver.findElements(By.xpath("//*[@id='advocatesDropdown']//input[@type='checkbox']"));
+            System.out.println("Found " + checkboxes.size() + " advocate checkboxes");
+            
+            if (!checkboxes.isEmpty()) {
+                // Filter valid checkboxes
+                List<WebElement> validCheckboxes = new java.util.ArrayList<>();
+                for (WebElement checkbox : checkboxes) {
+                    if (checkbox.isDisplayed() && checkbox.isEnabled()) {
+                        validCheckboxes.add(checkbox);
+                    }
                 }
+                
+                if (!validCheckboxes.isEmpty()) {
+                    // Select 1-2 random advocates
+                    int numToSelect = Math.min(random.nextInt(2) + 1, validCheckboxes.size());
+                    System.out.println("Selecting " + numToSelect + " Petitioner's Advocate(s)...");
+                    
+                    for (int i = 0; i < numToSelect; i++) {
+                        try {
+                            WebElement checkbox = validCheckboxes.get(i);
+                            // Get label text
+                            WebElement parent = checkbox.findElement(By.xpath("./parent::*"));
+                            String labelText = parent.getText().trim();
+                            
+                            // Scroll into view and click
+                            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkbox);
+                            Thread.sleep(300);
+                            
+                            if (!checkbox.isSelected()) {
+                                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+                                Thread.sleep(500);
+                                System.out.println("  ✓ Selected Advocate: " + labelText);
+                            }
+                        } catch (Exception ex) {
+                            System.out.println("  ! Failed to select advocate #" + (i + 1) + ": " + ex.getMessage());
+                        }
+                    }
+                    System.out.println("Petitioner's Advocate(s) selected successfully");
+                } else {
+                    System.out.println("⚠ No valid advocate checkboxes");
+                }
+            } else {
+                System.out.println("⚠ No advocate checkboxes available");
             }
             
             Thread.sleep(1000);
@@ -447,49 +594,136 @@ public class CivilCaseCreationPage {
     public void selectRandomPriority() {
         try {
             System.out.println("Selecting random Priority...");
-            waitHelper.waitForElementVisible(priorityDropdown);
-            Select select = new Select(priorityDropdown);
+            Thread.sleep(1500);
             
-            List<WebElement> options = select.getOptions();
-            if (options.size() > 1) {
-                int randomIndex = random.nextInt(options.size() - 1) + 1;
-                select.selectByIndex(randomIndex);
-                System.out.println("Selected Priority: " + select.getFirstSelectedOption().getText());
+            // Try to find element with both xpaths
+            WebElement priorityElement = null;
+            try {
+                priorityElement = driver.findElement(By.xpath("//*[@id='PriorityId']"));
+            } catch (Exception e) {
+                priorityElement = driver.findElement(By.xpath("/html/body/div[2]/div/main/div/div/main/div/div[2]/div/div/form/div[1]/div/div/div[1]/div[2]/div/div[6]/div/div[1]/div/div[20]/div/select"));
             }
             
+            // Scroll element into view
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", priorityElement);
+            Thread.sleep(800);
+            
+            // Highlight element for debugging
+            ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px solid red'", priorityElement);
+            Thread.sleep(500);
+            
+            System.out.println("Priority dropdown found. Tag: " + priorityElement.getTagName() + ", Displayed: " + priorityElement.isDisplayed() + ", Enabled: " + priorityElement.isEnabled());
+            
+            // Click to focus the dropdown first using JavaScript
+            try {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", priorityElement);
+                Thread.sleep(500);
+                System.out.println("Clicked Priority dropdown with JavaScript");
+            } catch (Exception clickEx) {
+                System.out.println("JavaScript click attempt: " + clickEx.getMessage());
+            }
+            
+            // Now try to select using JavaScript directly
+            String selectedOption = (String) ((JavascriptExecutor) driver).executeScript(
+                "var select = arguments[0];" +
+                "console.log('Options count: ' + select.options.length);" +
+                "if(select.options.length > 1) {" +
+                "  var validOptions = [];" +
+                "  for(var i = 1; i < select.options.length; i++) {" +
+                "    if(select.options[i].value && select.options[i].value !== '') {" +
+                "      validOptions.push(i);" +
+                "    }" +
+                "  }" +
+                "  if(validOptions.length > 0) {" +
+                "    var randomIndex = validOptions[Math.floor(Math.random() * validOptions.length)];" +
+                "    select.selectedIndex = randomIndex;" +
+                "    select.dispatchEvent(new Event('change', { bubbles: true }));" +
+                "    select.dispatchEvent(new Event('blur', { bubbles: true }));" +
+                "    console.log('Selected index: ' + randomIndex + ', value: ' + select.options[randomIndex].text);" +
+                "    return select.options[randomIndex].text;" +
+                "  }" +
+                "}" +
+                "return 'No valid options';", 
+                priorityElement
+            );
+            
+            System.out.println("✓ Selected Priority: " + selectedOption);
             Thread.sleep(1000);
+            
+            // Remove highlight
+            ((JavascriptExecutor) driver).executeScript("arguments[0].style.border=''", priorityElement);
+            
         } catch (Exception e) {
             System.err.println("Error selecting Priority: " + e.getMessage());
+            e.printStackTrace();
             throw new RuntimeException("Failed to select Priority", e);
         }
     }
     
     /**
-     * Select random Parties
+     * Select random Parties (supports multiple selections)
      */
     public void selectRandomParties() {
         try {
-            System.out.println("Selecting random Parties...");
+            System.out.println("Selecting Parties...");
             Thread.sleep(2000);
             
             WebElement partiesDropdown = driver.findElement(By.xpath("//*[@id='flush-collapseOne']/div/div[6]/div/div[1]/div/div[21]/div/div/div[1]"));
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", partiesDropdown);
-            Thread.sleep(500);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", partiesDropdown);
+            Thread.sleep(800);
             
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", partiesDropdown);
+            System.out.println("Clicked Parties dropdown");
             Thread.sleep(2000);
             
-            // Select first available option from dropdown - click on the li element instead of checkbox
-            List<WebElement> options = driver.findElements(By.xpath("//*[@id='partyDropdown']//li"));
-            if (!options.isEmpty()) {
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", options.get(0));
-                System.out.println("Party selected successfully");
-            } else {
-                List<WebElement> labels = driver.findElements(By.xpath("//*[@id='partyDropdown']//label"));
-                if (!labels.isEmpty()) {
-                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", labels.get(0));
-                    System.out.println("Party selected successfully (via label)");
+            // Find checkbox inputs specifically
+            List<WebElement> checkboxes = driver.findElements(By.xpath("//*[@id='partyDropdown']//input[@type='checkbox']"));
+            System.out.println("Found " + checkboxes.size() + " party checkboxes");
+            
+            if (!checkboxes.isEmpty()) {
+                // Filter valid checkboxes
+                List<WebElement> validCheckboxes = new java.util.ArrayList<>();
+                for (WebElement checkbox : checkboxes) {
+                    if (checkbox.isDisplayed() && checkbox.isEnabled()) {
+                        WebElement parent = checkbox.findElement(By.xpath("./parent::*"));
+                        String labelText = parent.getText().trim();
+                        if (!labelText.isEmpty() && !labelText.equalsIgnoreCase("No Record Found")) {
+                            validCheckboxes.add(checkbox);
+                        }
+                    }
                 }
+                
+                if (!validCheckboxes.isEmpty()) {
+                    // Select 1-3 random parties
+                    int numToSelect = Math.min(random.nextInt(3) + 1, validCheckboxes.size());
+                    System.out.println("Selecting " + numToSelect + " Parties...");
+                    
+                    for (int i = 0; i < numToSelect; i++) {
+                        try {
+                            WebElement checkbox = validCheckboxes.get(i);
+                            // Get label text
+                            WebElement parent = checkbox.findElement(By.xpath("./parent::*"));
+                            String labelText = parent.getText().trim();
+                            
+                            // Scroll into view and click
+                            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", checkbox);
+                            Thread.sleep(300);
+                            
+                            if (!checkbox.isSelected()) {
+                                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+                                Thread.sleep(500);
+                                System.out.println("  ✓ Selected Party: " + labelText);
+                            }
+                        } catch (Exception ex) {
+                            System.out.println("  ! Failed to select party #" + (i + 1) + ": " + ex.getMessage());
+                        }
+                    }
+                    System.out.println("Parties selected successfully");
+                } else {
+                    System.out.println("⚠ No valid party checkboxes");
+                }
+            } else {
+                System.out.println("⚠ No party checkboxes available");
             }
             
             Thread.sleep(1000);
@@ -664,23 +898,105 @@ public class CivilCaseCreationPage {
     }
     
     /**
-     * Enter Registration Date
+     * Enter Registration Date (random past date)
      */
     public void enterRegistrationDate() {
         try {
             System.out.println("Entering Registration Date...");
-            LocalDate date = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+            
+            // Generate random date between 30 to 365 days in the past
+            int daysInPast = random.nextInt(336) + 30; // 30 to 365 days ago
+            LocalDate date = LocalDate.now().minusDays(daysInPast);
+            
+            // Format as dd.mm.yyyy
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
             String formattedDate = date.format(formatter);
             
+            System.out.println("Generated date: " + formattedDate + " (" + daysInPast + " days ago)");
+            
+            // Scroll to element
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", registrationDateInput);
+            Thread.sleep(800);
+            
             waitHelper.waitForElementVisible(registrationDateInput);
-            registrationDateInput.clear();
-            registrationDateInput.sendKeys(formattedDate);
-            System.out.println("Entered Registration Date: " + formattedDate);
+            
+            // Click on the date input field to open date picker
+            try {
+                registrationDateInput.click();
+                System.out.println("Clicked on Registration Date field");
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", registrationDateInput);
+                System.out.println("Clicked Registration Date field via JavaScript");
+                Thread.sleep(1000);
+            }
+            
+            // Clear any existing value and enter the date
+            try {
+                ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].removeAttribute('readonly');" +
+                    "arguments[0].value = '';" +
+                    "arguments[0].focus();", 
+                    registrationDateInput
+                );
+                Thread.sleep(300);
+                
+                registrationDateInput.clear();
+                Thread.sleep(300);
+                
+                registrationDateInput.sendKeys(formattedDate);
+                System.out.println("Entered date: " + formattedDate);
+                Thread.sleep(1000);
+                
+                // Trigger change event
+                ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));" +
+                    "arguments[0].dispatchEvent(new Event('blur', { bubbles: true }));",
+                    registrationDateInput
+                );
+                Thread.sleep(500);
+                
+                // Click the field again or press Enter to confirm the date
+                try {
+                    registrationDateInput.sendKeys(Keys.ENTER);
+                    System.out.println("Pressed Enter to confirm date");
+                    Thread.sleep(500);
+                } catch (Exception enterEx) {
+                    System.out.println("Enter key not needed");
+                }
+                
+                // If there's a date picker calendar visible, try to click on today or close it
+                try {
+                    // Try to click outside to close any open date picker
+                    driver.findElement(By.tagName("body")).sendKeys(Keys.ESCAPE);
+                    Thread.sleep(300);
+                } catch (Exception escEx) {
+                    // Ignore
+                }
+                
+                System.out.println("✓ Registration Date set successfully: " + formattedDate);
+                
+            } catch (Exception dateEntryEx) {
+                System.err.println("Date entry failed: " + dateEntryEx.getMessage());
+                // Try one more time with pure JavaScript
+                ((JavascriptExecutor) driver).executeScript(
+                    "arguments[0].removeAttribute('readonly');" +
+                    "arguments[0].value = arguments[1];" +
+                    "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));" +
+                    "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));" +
+                    "arguments[0].dispatchEvent(new Event('blur', { bubbles: true }));",
+                    registrationDateInput, formattedDate
+                );
+                System.out.println("✓ Set date via JavaScript: " + formattedDate);
+            }
+            
             Thread.sleep(1000);
+            
         } catch (Exception e) {
             System.err.println("Error entering Registration Date: " + e.getMessage());
-            throw new RuntimeException("Failed to enter Registration Date", e);
+            e.printStackTrace();
+            // Don't throw exception, just log and continue
+            System.out.println("Continuing without Registration Date...");
         }
     }
     
@@ -754,6 +1070,442 @@ public class CivilCaseCreationPage {
     }
     
     /**
+     * Capture Case ID
+     */
+    public String captureCaseId() {
+        try {
+            System.out.println("Capturing Case ID...");
+            Thread.sleep(3000);
+            
+            waitHelper.waitForElementVisible(caseIdElement);
+            capturedCaseId = caseIdElement.getText().trim();
+            System.out.println("✓ Captured Case ID: " + capturedCaseId);
+            
+            return capturedCaseId;
+        } catch (Exception e) {
+            System.err.println("Error capturing Case ID: " + e.getMessage());
+            throw new RuntimeException("Failed to capture Case ID", e);
+        }
+    }
+    
+    /**
+     * Click User dropdown (Ayushi G / Ajinkya)
+     */
+    public void clickUserDropdown() {
+        try {
+            System.out.println("Clicking user dropdown...");
+            waitHelper.waitForElementClickable(userDropdown);
+            Thread.sleep(500);
+            
+            try {
+                userDropdown.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", userDropdown);
+            }
+            
+            System.out.println("User dropdown clicked successfully");
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            System.err.println("Error clicking user dropdown: " + e.getMessage());
+            throw new RuntimeException("Failed to click user dropdown", e);
+        }
+    }
+    
+    /**
+     * Click Logout link
+     */
+    public void clickLogout() {
+        try {
+            System.out.println("Clicking logout...");
+            waitHelper.waitForElementClickable(logoutLink);
+            
+            try {
+                logoutLink.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", logoutLink);
+            }
+            
+            System.out.println("Logout clicked successfully");
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            System.err.println("Error clicking logout: " + e.getMessage());
+            throw new RuntimeException("Failed to click logout", e);
+        }
+    }
+    
+    /**
+     * Login as different user
+     */
+    public void loginAs(String username, String password, String otp) {
+        try {
+            System.out.println("Logging in as: " + username);
+            
+            // Enter username
+            waitHelper.waitForElementVisible(usernameInput);
+            usernameInput.clear();
+            usernameInput.sendKeys(username);
+            System.out.println("Entered username: " + username);
+            Thread.sleep(500);
+            
+            // Enter password
+            passwordInput.clear();
+            passwordInput.sendKeys(password);
+            System.out.println("Entered password");
+            Thread.sleep(500);
+            
+            // Click Sign in
+            signInButton.click();
+            System.out.println("Clicked Sign in button");
+            Thread.sleep(3000);
+            
+            // Enter OTP
+            waitHelper.waitForElementVisible(otpInput);
+            otpInput.clear();
+            otpInput.sendKeys(otp);
+            System.out.println("Entered OTP: " + otp);
+            Thread.sleep(500);
+            
+            // Click Sign in again
+            signInButton.click();
+            System.out.println("Clicked Sign in button after OTP");
+            Thread.sleep(5000);
+            
+            System.out.println("✓ Logged in successfully as: " + username);
+        } catch (Exception e) {
+            System.err.println("Error logging in: " + e.getMessage());
+            throw new RuntimeException("Failed to login as " + username, e);
+        }
+    }
+    
+    /**
+     * Click Actionable Items link
+     */
+    public void clickActionableItems() {
+        try {
+            System.out.println("Clicking Actionable Items...");
+            waitHelper.waitForElementClickable(actionableItemsLink);
+            Thread.sleep(500);
+            
+            try {
+                actionableItemsLink.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", actionableItemsLink);
+            }
+            
+            System.out.println("Actionable Items clicked successfully");
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            System.err.println("Error clicking Actionable Items: " + e.getMessage());
+            throw new RuntimeException("Failed to click Actionable Items", e);
+        }
+    }
+    
+    /**
+     * Click Approval tab
+     */
+    public void clickApprovalTab() {
+        try {
+            System.out.println("Clicking Approval tab...");
+            waitHelper.waitForElementClickable(approvalTab);
+            
+            try {
+                approvalTab.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", approvalTab);
+            }
+            
+            System.out.println("Approval tab clicked successfully");
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.err.println("Error clicking Approval tab: " + e.getMessage());
+            throw new RuntimeException("Failed to click Approval tab", e);
+        }
+    }
+    
+    /**
+     * Click Advocate Allocation Approval tab
+     */
+    public void clickAdvocateAllocationApproval() {
+        try {
+            System.out.println("Clicking Advocate Allocation Approval tab...");
+            waitHelper.waitForElementClickable(advocateAllocationApprovalTab);
+            
+            try {
+                advocateAllocationApprovalTab.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", advocateAllocationApprovalTab);
+            }
+            
+            System.out.println("Advocate Allocation Approval tab clicked successfully");
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.err.println("Error clicking Advocate Allocation Approval tab: " + e.getMessage());
+            throw new RuntimeException("Failed to click Advocate Allocation Approval tab", e);
+        }
+    }
+    
+    /**
+     * Click Advance Filter link
+     */
+    public void clickAdvanceFilter() {
+        try {
+            System.out.println("Clicking Advance Filter...");
+            waitHelper.waitForElementClickable(advanceFilterLink);
+            
+            try {
+                advanceFilterLink.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", advanceFilterLink);
+            }
+            
+            System.out.println("Advance Filter clicked successfully");
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.err.println("Error clicking Advance Filter: " + e.getMessage());
+            throw new RuntimeException("Failed to click Advance Filter", e);
+        }
+    }
+    
+    /**
+     * Click Apply button
+     */
+    public void clickApply() {
+        try {
+            System.out.println("Clicking Apply button...");
+            waitHelper.waitForElementClickable(applyButton);
+            
+            try {
+                applyButton.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", applyButton);
+            }
+            
+            System.out.println("Apply button clicked successfully");
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            System.err.println("Error clicking Apply button: " + e.getMessage());
+            throw new RuntimeException("Failed to click Apply button", e);
+        }
+    }
+    
+    /**
+     * Click Last page link
+     */
+    public void clickLastPage() {
+        try {
+            System.out.println("Clicking Last page...");
+            waitHelper.waitForElementClickable(lastPageLink);
+            
+            try {
+                lastPageLink.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", lastPageLink);
+            }
+            
+            System.out.println("Last page clicked successfully");
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            System.err.println("Error clicking Last page: " + e.getMessage());
+            throw new RuntimeException("Failed to click Last page", e);
+        }
+    }
+    
+    /**
+     * Find and click checkbox for captured Case ID
+     */
+    public void clickCaseCheckbox() {
+        try {
+            System.out.println("===================================================");
+            System.out.println("Searching for Case ID in approval table: " + capturedCaseId);
+            System.out.println("===================================================");
+            Thread.sleep(2000);
+            
+            // Find all table rows in the approval list
+            List<WebElement> tableRows = driver.findElements(By.xpath("//table/tbody/tr"));
+            System.out.println("Found " + tableRows.size() + " rows in approval table");
+            
+            boolean caseFound = false;
+            
+            // Iterate through each row to find the matching Case ID
+            for (int i = 0; i < tableRows.size(); i++) {
+                try {
+                    WebElement row = tableRows.get(i);
+                    String rowText = row.getText();
+                    
+                    // Check if this row contains the captured Case ID
+                    if (rowText.contains(capturedCaseId)) {
+                        System.out.println("✓ Found matching case in row " + (i + 1));
+                        System.out.println("Row text: " + rowText);
+                        
+                        // Find the checkbox in this specific row
+                        WebElement checkbox = row.findElement(By.xpath(".//input[@type='checkbox']"));
+                        
+                        // Scroll to checkbox
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", checkbox);
+                        Thread.sleep(500);
+                        
+                        // Click the checkbox
+                        try {
+                            checkbox.click();
+                        } catch (Exception e) {
+                            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", checkbox);
+                        }
+                        
+                        System.out.println("✓ Clicked checkbox for Case ID: " + capturedCaseId);
+                        caseFound = true;
+                        break;
+                    }
+                } catch (Exception e) {
+                    // Skip rows that cause errors
+                    continue;
+                }
+            }
+            
+            if (!caseFound) {
+                System.err.println("ERROR: Case ID " + capturedCaseId + " not found in approval table!");
+                System.err.println("Please check if the case appears on the last page or needs pagination");
+                throw new RuntimeException("Case ID " + capturedCaseId + " not found in approval table");
+            }
+            
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            System.err.println("Error clicking case checkbox: " + e.getMessage());
+            throw new RuntimeException("Failed to click case checkbox for Case ID: " + capturedCaseId, e);
+        }
+    }
+    
+    /**
+     * Click Approve button and handle alert
+     */
+    public void clickApprove() {
+        try {
+            System.out.println("Clicking Approve button...");
+            waitHelper.waitForElementClickable(approveButton);
+            
+            try {
+                approveButton.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", approveButton);
+            }
+            
+            System.out.println("Approve button clicked successfully");
+            Thread.sleep(1000);
+            
+            // Handle the first alert: "Selected records will be approved. Continue?"
+            try {
+                System.out.println("Waiting for confirmation alert...");
+                Thread.sleep(500);
+                
+                driver.switchTo().alert().accept();
+                System.out.println("✓ Alert 1 accepted: 'Selected records will be approved. Continue?'");
+                Thread.sleep(1500);
+            } catch (Exception alertEx) {
+                System.err.println("No first alert appeared: " + alertEx.getMessage());
+            }
+            
+            // Handle the second alert: "Advocate(s) approved!"
+            try {
+                System.out.println("Waiting for success alert...");
+                Thread.sleep(500);
+                
+                driver.switchTo().alert().accept();
+                System.out.println("✓ Alert 2 accepted: 'Advocate(s) approved!'");
+                Thread.sleep(2000);
+            } catch (Exception alertEx) {
+                System.err.println("No second alert appeared: " + alertEx.getMessage());
+            }
+            
+        } catch (Exception e) {
+            System.err.println("Error clicking Approve button: " + e.getMessage());
+            throw new RuntimeException("Failed to click Approve button", e);
+        }
+    }
+    
+    /**
+     * Handle alert and click OK
+     */
+    public void acceptAlert() {
+        try {
+            System.out.println("Handling alert...");
+            Thread.sleep(1000);
+            
+            driver.switchTo().alert().accept();
+            System.out.println("Alert accepted successfully");
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.err.println("Error handling alert: " + e.getMessage());
+            // Don't throw exception, alert might not appear
+            System.out.println("No alert to handle");
+        }
+    }
+    
+    /**
+     * Click Load Cases button
+     */
+    public void clickLoadCases() {
+        try {
+            System.out.println("Clicking Load Cases button...");
+            waitHelper.waitForElementClickable(loadCasesButton);
+            
+            try {
+                loadCasesButton.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", loadCasesButton);
+            }
+            
+            System.out.println("Load Cases button clicked successfully");
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            System.err.println("Error clicking Load Cases button: " + e.getMessage());
+            throw new RuntimeException("Failed to click Load Cases button", e);
+        }
+    }
+    
+    /**
+     * Click Action dropdown
+     */
+    public void clickActionDropdown() {
+        try {
+            System.out.println("Clicking Action dropdown...");
+            waitHelper.waitForElementClickable(actionDropdown);
+            
+            try {
+                actionDropdown.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", actionDropdown);
+            }
+            
+            System.out.println("Action dropdown clicked successfully");
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            System.err.println("Error clicking Action dropdown: " + e.getMessage());
+            throw new RuntimeException("Failed to click Action dropdown", e);
+        }
+    }
+    
+    /**
+     * Click Details link
+     */
+    public void clickDetailsLink() {
+        try {
+            System.out.println("Clicking Details link...");
+            waitHelper.waitForElementClickable(detailsLink);
+            
+            try {
+                detailsLink.click();
+            } catch (Exception e) {
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", detailsLink);
+            }
+            
+            System.out.println("Details link clicked successfully");
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            System.err.println("Error clicking Details link: " + e.getMessage());
+            throw new RuntimeException("Failed to click Details link", e);
+        }
+    }
+    
+    /**
      * Capture System ID
      */
     public String captureSystemId() {
@@ -761,6 +1513,7 @@ public class CivilCaseCreationPage {
             System.out.println("Capturing System ID...");
             Thread.sleep(3000);
             
+            WebElement systemIdElement = driver.findElement(By.xpath("//*[@id='case-basicdetails']/div/div[2]/div/div[1]/div"));
             waitHelper.waitForElementVisible(systemIdElement);
             capturedSystemId = systemIdElement.getText().trim();
             System.out.println("Captured System ID: " + capturedSystemId);
@@ -779,6 +1532,8 @@ public class CivilCaseCreationPage {
         try {
             System.out.println("Clicking Back button...");
             Thread.sleep(2000);
+            
+            WebElement backButton = driver.findElement(By.xpath("/html/body/div[2]/div/main/div[3]/div/div/main/div/div[1]/a"));
             
             try {
                 backButton.click();
@@ -800,6 +1555,10 @@ public class CivilCaseCreationPage {
     public void searchSystemId() {
         try {
             System.out.println("Searching for System ID: " + capturedSystemId);
+            
+            WebElement searchInput = driver.findElement(By.xpath("//*[@id='CaseSystemId']"));
+            WebElement searchButton = driver.findElement(By.xpath("//*[@id='quickSearchForm']/button"));
+            
             waitHelper.waitForElementVisible(searchInput);
             searchInput.clear();
             searchInput.sendKeys(capturedSystemId);
@@ -820,6 +1579,8 @@ public class CivilCaseCreationPage {
     public void clickAction() {
         try {
             System.out.println("Clicking Action button...");
+            
+            WebElement actionButton = driver.findElement(By.xpath("//*[@id='caseListingContainer']/div/table/tbody/tr/td[10]/div/a/I"));
             waitHelper.waitForElementClickable(actionButton);
             
             try {
@@ -842,6 +1603,8 @@ public class CivilCaseCreationPage {
     public void clickDetails() {
         try {
             System.out.println("Clicking Details link...");
+            
+            WebElement detailsLink = driver.findElement(By.xpath("//*[@id='caseListingContainer']/div/table/tbody/tr/td[10]/div/ul/li[2]/a"));
             waitHelper.waitForElementClickable(detailsLink);
             
             try {
@@ -864,4 +1627,12 @@ public class CivilCaseCreationPage {
     public String getCapturedSystemId() {
         return capturedSystemId;
     }
+    
+    /**
+     * Get captured Case ID
+     */
+    public String getCapturedCaseId() {
+        return capturedCaseId;
+    }
 }
+

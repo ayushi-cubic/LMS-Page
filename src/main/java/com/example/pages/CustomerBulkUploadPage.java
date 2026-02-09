@@ -165,14 +165,47 @@ public class CustomerBulkUploadPage {
     }
     
     /**
+     * Clear old template files from downloads folder to avoid numbered duplicates
+     */
+    private void clearOldTemplates() {
+        try {
+            File dir = new File(downloadFolder);
+            File[] files = dir.listFiles((d, name) -> 
+                name.startsWith("Customer") && name.endsWith(".xlsx") && 
+                !name.contains("BulkUpload_") && !name.contains("Report"));
+            
+            if (files != null && files.length > 0) {
+                System.out.println("Clearing " + files.length + " old template files...");
+                for (File file : files) {
+                    if (file.delete()) {
+                        System.out.println("  Deleted: " + file.getName());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Warning: Could not clear old templates: " + e.getMessage());
+        }
+    }
+    
+    /**
      * Click Download Excel Format button
      */
     public void clickDownloadExcelFormat() {
         try {
             System.out.println("Clicking Download Excel Format button...");
+            
+            // Clear old template files first
+            clearOldTemplates();
+            
+            // Wait for button to be enabled (it may be disabled initially)
+            Thread.sleep(2000);
+            
             waitHelper.waitForElementClickable(downloadExcelButton);
             downloadExcelButton.click();
             System.out.println("Download button clicked");
+            
+            // Give time for download to start
+            Thread.sleep(2000);
         } catch (Exception e) {
             System.err.println("Error clicking download button: " + e.getMessage());
             throw new RuntimeException("Failed to click Download Excel Format button", e);
@@ -289,14 +322,14 @@ public class CustomerBulkUploadPage {
             
             fis.close();
             
-            // Save updated file
-            updatedFilePath = downloadFolder + File.separator + "CustomerBulkUpload_" + System.currentTimeMillis() + ".xlsx";
+            // Save updated file directly to the downloaded file (overwrite)
+            updatedFilePath = filePath;
             FileOutputStream fos = new FileOutputStream(updatedFilePath);
             workbook.write(fos);
             fos.close();
             workbook.close();
             
-            System.out.println("Excel file updated and saved: " + updatedFilePath);
+            System.out.println("Excel file updated and saved to downloaded file: " + updatedFilePath);
             return updatedFilePath;
             
         } catch (Exception e) {
@@ -315,17 +348,30 @@ public class CustomerBulkUploadPage {
         
         // Generate Customer specific data as per requirements
         // Using lowercase keys for case-insensitive matching with Excel headers
-        data.put("customer number", RandomDataGenerator.generateAlphanumeric(10));
-        data.put("customer name", RandomDataGenerator.generateName());
-        data.put("father name", ""); // Keep empty as per requirement
+        String customerNum = "CUST" + RandomDataGenerator.generateAlphanumeric(6);
+        String customerName = RandomDataGenerator.generateName();
+        
+        System.out.println("\n=== Generated Customer Test Data ===");
+        System.out.println("Customer Number: " + customerNum);
+        System.out.println("Customer Name: " + customerName);
+        
+        data.put("customer number", customerNum);
+        data.put("customer name", customerName);
+        data.put("father name", "Rajesh Kumar"); // Father name
         data.put("customer type", "Individual");
         data.put("business unit", "CTQA");
-        data.put("zone", "NA");
-        data.put("state", "NA");
-        data.put("location", "NA");
+        data.put("zone", "West");
+        data.put("state", "Maharashtra");
+        data.put("location", "Mumbai");
         data.put("trust name", "ABC");
-        data.put("trust code", "002");
-        data.put("dealing officer 1 emailid", "Ayushi@Test.com");
+        data.put("trust code", "TR002");
+        data.put("dealing officer 1 emailid", "ayushi@test.com");
+        data.put("mobile", "9876543210");
+        data.put("email", customerName.toLowerCase().replace(" ", ".") + "@test.com");
+        
+        System.out.println("Business Unit: CTQA");
+        System.out.println("Zone: West | State: Maharashtra | Location: Mumbai");
+        System.out.println("====================================\n");
         
         return data;
     }

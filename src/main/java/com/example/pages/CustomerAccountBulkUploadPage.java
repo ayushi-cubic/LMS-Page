@@ -193,11 +193,41 @@ public class CustomerAccountBulkUploadPage {
     }
     
     /**
+     * Clear old template files from downloads folder to avoid numbered duplicates
+     */
+    private void clearOldAccountTemplates() {
+        try {
+            File dir = new File(downloadFolder);
+            File[] files = dir.listFiles((d, name) -> 
+                name.contains("Account") && name.endsWith(".xlsx") && 
+                !name.contains("AccountBulkUpload_") && !name.contains("Report"));
+            
+            if (files != null && files.length > 0) {
+                System.out.println("Clearing " + files.length + " old account template files...");
+                for (File file : files) {
+                    if (file.delete()) {
+                        System.out.println("  Deleted: " + file.getName());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Warning: Could not clear old templates: " + e.getMessage());
+        }
+    }
+    
+    /**
      * Click Download Excel Format button
      */
     public void clickDownloadExcelFormat() {
         try {
             System.out.println("Clicking Download Excel Format button...");
+            
+            // Clear old template files first
+            clearOldAccountTemplates();
+            
+            // Wait for button to be enabled
+            Thread.sleep(2000);
+            
             waitHelper.waitForElementClickable(downloadExcelButton);
             
             // Try regular click first
@@ -210,6 +240,8 @@ public class CustomerAccountBulkUploadPage {
                 System.out.println("Download button clicked using JavaScript");
             }
             
+            // Give time for download to start
+            Thread.sleep(2000);
             System.out.println("Download button clicked successfully");
         } catch (Exception e) {
             System.err.println("Error clicking download button: " + e.getMessage());
@@ -327,14 +359,14 @@ public class CustomerAccountBulkUploadPage {
             
             fis.close();
             
-            // Save updated file
-            updatedFilePath = downloadFolder + File.separator + "CustomerAccountBulkUpload_" + System.currentTimeMillis() + ".xlsx";
+            // Save updated file directly to the downloaded file (overwrite)
+            updatedFilePath = filePath;
             FileOutputStream fos = new FileOutputStream(updatedFilePath);
             workbook.write(fos);
             fos.close();
             workbook.close();
             
-            System.out.println("Excel file updated and saved: " + updatedFilePath);
+            System.out.println("Excel file updated and saved to downloaded file: " + updatedFilePath);
             return updatedFilePath;
             
         } catch (Exception e) {
@@ -356,6 +388,18 @@ public class CustomerAccountBulkUploadPage {
         
         // Generate random alphanumeric Account Number
         String accountNumber = "ACC" + System.currentTimeMillis();
+        
+        System.out.println("\n=== Generated Customer Account Test Data ===");
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Customer Number: 202040");
+        System.out.println("Facility: Saving account");
+        System.out.println("Principal Amount: 100000 | Outstanding: 10000");
+        System.out.println("Interest Rate: 3%");
+        System.out.println("Business Unit: CTQA | Zone: West");
+        System.out.println("State: Maharashtra | Location: Akola");
+        System.out.println("Account Status: Live");
+        System.out.println("Dates - Agreement: 03.08.2025 | Disbursal: 05.08.2025 | Maturity: 06.08.2025");
+        System.out.println("============================================\n");
         
         data.put("account number", accountNumber);
         data.put("customer number", "202040");

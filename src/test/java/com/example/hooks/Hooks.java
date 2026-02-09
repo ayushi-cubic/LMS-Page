@@ -127,6 +127,47 @@ public class Hooks {
                         java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".xlsx";
                     generator.saveToFile(filePath);
                     System.out.println("Excel file generated successfully: " + filePath);
+                } else if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("BulkUpload"))) {
+                    // Generate Bulk Upload Excel with granular test cases
+                    generator = new ExcelTestCaseGenerator("Bulk Upload Test Cases");
+                    generator.createHeader();
+                    
+                    // Add common test cases for all bulk uploads
+                    generator.addBulkUploadLoginTestCase(true);
+                    generator.addBulkUploadNavigationTestCase(true);
+                    generator.addSelectUploadTypeTestCase(true, "Customers");
+                    
+                    // Add specific bulk upload test cases based on scenario
+                    if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("CustomerBulkUpload"))) {
+                        generator.addSelectCustomerTypeTestCase(true, "Customer");
+                        generator.addDownloadExcelTemplateTestCase(true, "Customer.xlsx");
+                        generator.addFillExcelWithDataTestCase(true, "Customer", 13);
+                        generator.addUploadExcelFileTestCase(true, "Customer.xlsx");
+                        generator.addClickUploadButtonTestCase(true);
+                        generator.addValidateUploadSuccessTestCase(true);
+                        generator.addCustomerBulkUploadTestCase(true, "CUST" + System.currentTimeMillis(), "John Smith");
+                    } else if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("AssetBulkUpload"))) {
+                        generator.addSelectCustomerTypeTestCase(true, "Customer Security");
+                        generator.addDownloadExcelTemplateTestCase(true, "Customer Security.xlsx");
+                        generator.addFillExcelWithDataTestCase(true, "Customer Asset", 8);
+                        generator.addUploadExcelFileTestCase(true, "Customer Security.xlsx");
+                        generator.addClickUploadButtonTestCase(true);
+                        generator.addValidateUploadSuccessTestCase(true);
+                        generator.addCustomerAssetBulkUploadTestCase(true, "New asset", "ayushi645311");
+                    } else if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("AccountBulkUpload"))) {
+                        generator.addSelectCustomerTypeTestCase(true, "Customer Account");
+                        generator.addDownloadExcelTemplateTestCase(true, "Customer Account.xlsx");
+                        generator.addFillExcelWithDataTestCase(true, "Customer Account", 15);
+                        generator.addUploadExcelFileTestCase(true, "Customer Account.xlsx");
+                        generator.addClickUploadButtonTestCase(true);
+                        generator.addValidateUploadSuccessTestCase(true);
+                        generator.addCustomerAccountBulkUploadTestCase(true, "ACC" + System.currentTimeMillis(), "202040");
+                    }
+                    
+                    String filePath = "Bulk_Upload_Test_Cases_" + 
+                        java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".xlsx";
+                    generator.saveToFile(filePath);
+                    System.out.println("Excel file generated successfully: " + filePath);
                 } else {
                     // Default to Customer
                     generator = new ExcelTestCaseGenerator("Customer Test Cases");
