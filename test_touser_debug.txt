@@ -1,0 +1,204 @@
+﻿mvn : WARNING: A terminally deprecated method in sun.misc.Unsafe has been 
+called
+At line:1 char:1
++ mvn clean test -Dtest=CustomerDetailManagementTestRunner 2>&1 | Out-F ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: A term...has been called 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by 
+com.google.inject.internal.aop.HiddenClassDefiner 
+(file:/C:/Program%20Files/apache-maven-3.9.11/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class 
+com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------< selenium.practice.com.example:seleniumpracticedemo >---------
+[INFO] Building seleniumpracticedemo 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ seleniumpracticedemo ---
+[INFO] Deleting C:\Users\DELL\Documents\Automation framework\LMS-Page\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ seleniumpracticedemo ---
+[INFO] skip non existing resourceDirectory C:\Users\DELL\Documents\Automation framework\LMS-Page\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ seleniumpracticedemo ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 44 source files with javac [debug release 25] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ seleniumpracticedemo ---
+[INFO] Copying 17 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ seleniumpracticedemo ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 33 source files with javac [debug release 25] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ seleniumpracticedemo ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.runner.CustomerDetailManagementTestRunner
+
+@CustomerDetailManagement @EditCustomerDetails @FullFlow
+Scenario: Edit all customer detail sections with random data                                # features/CustomerDetailManagement.feature:14
+
+Screenshots folder created: target/screenshots_20260217_182717
+
+==============================================
+STARTING TEST EXECUTION
+==============================================
+
+Generating Excel test case document...
+ERROR StatusLogger Log4j2 could not find a logging implementation. Please add 
+log4j-core to the classpath. Using SimpleLogger to log to the console...
+Excel test case file created successfully: Customer_Search_Test_Cases_20260217_182717.xlsx
+Excel file generated successfully: Customer_Search_Test_Cases_20260217_182717.xlsx
+
+Initializing browser...
+[main] INFO io.github.bonigarcia.wdm.WebDriverManager - Using chromedriver 
+145.0.7632.76 (resolved driver for Chrome 145)
+[main] INFO io.github.bonigarcia.wdm.WebDriverManager - Exporting 
+webdriver.chrome.driver as 
+C:\Users\DELL\.cache\selenium\chromedriver\win64\145.0.7632.76\chromedriver.exe
+Feb 17, 2026 6:27:20 PM org.openqa.selenium.devtools.CdpVersionFinder 
+findNearestMatch
+WARNING: Unable to find CDP implementation matching 145
+Feb 17, 2026 6:27:20 PM org.openqa.selenium.chromium.ChromiumDriver 
+lambda$new$5
+WARNING: Unable to find version of CDP to use for 145.0.7632.76. You may need 
+to include a dependency on a specific version of the CDP using something 
+similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.25.0` where the 
+version ("v86") matches the version of the chromium-based browser you're using 
+and the version number of the artifact is the same as Selenium's.
+Browser initialized successfully
+
+==============================================
+Starting Scenario 1: Edit all customer detail sections with random data
+==============================================
+  Given I open the LMS application for customer details                                     # com.example.stepdefinitions.CustomerDetailStepDefinitions.iOpenTheLMSApplicationForCustomerDetails()
+
+    Embedding Step Screenshot [image/png 60012 bytes]
+
+Screenshot saved: target/screenshots_20260217_182717/step_001_Edit_all_customer_detail_sections_with_random_data.png
+LoginPage.login() called with:
+  Email/Username: [ayushi]
+  Password: [Legal@1234]
+  When I login to LMS with username "ayushi" and password "Legal@1234" for customer details # com.example.stepdefinitions.CustomerDetailStepDefinitions.iLoginToLMSWithUsernameAndPasswordForCustomerDetails(java.lang.String,java.lang.String)
+
+    Embedding Step Screenshot [image/png 81923 bytes]
+
+Screenshot saved: target/screenshots_20260217_182717/step_002_Edit_all_customer_detail_sections_with_random_data.png
+  And I enter the OTP "123456" for customer details                                         # com.example.stepdefinitions.CustomerDetailStepDefinitions.iEnterTheOTPForCustomerDetails(java.lang.String)
+
+    Embedding Step Screenshot [image/png 55822 bytes]
+
+Screenshot saved: target/screenshots_20260217_182717/step_003_Edit_all_customer_detail_sections_with_random_data.png
+Login successful
+  Then I should be successfully logged in to customer details                               # com.example.stepdefinitions.CustomerDetailStepDefinitions.iShouldBeSuccessfullyLoggedInToCustomerDetails()
+
+    Embedding Step Screenshot [image/png 110955 bytes]
+
+Screenshot saved: target/screenshots_20260217_182717/step_004_Edit_all_customer_detail_sections_with_random_data.png
+
+================================================================================
+CustomerDetailPage: Starting full customer details automation
+================================================================================
+
+>>> STEP 0: Initial Navigation
+CustomerDetailPage: Clicking Borrowers menu
+CustomerDetailPage: Borrowers menu clicked successfully
+CustomerDetailPage: Clicking Customer submenu
+CustomerDetailPage: Customer submenu clicked successfully
+CustomerDetailPage: Clicking Load Customers button
+CustomerDetailPage: Clicking Action button
+CustomerDetailPage: Clicking Details button
+? Initial navigation complete
+
+>>> STEP 1: Fill Basic Details
+CustomerDetailPage: Starting fillBasicDetailsWithRandomData
+CustomerDetailPage: Clicking Edit Basic Details
+  - Filling customer details fields...
+CustomerDetailPage: Entering Customer Number: 7378616279
+CustomerDetailPage: Entering Customer Name: Benton Mitchell
+CustomerDetailPage: Entering Father Name: Jimmy Kertzmann
+CustomerDetailPage: Selecting Random Customer Type
+Selected random option: Trusts
+CustomerDetailPage: Selecting Random Industry
+Selected random option: NA
+CustomerDetailPage: Selecting Random Segment
+Selected random option: NAA
+CustomerDetailPage: Entering Phone Number: 8756557824
+CustomerDetailPage: Entering Email: alfreda.runolfsson@yahoo.com
+CustomerDetailPage: Entering Adhaar Number: 307146744368
+CustomerDetailPage: Entering PAN: EHZGX1004D
+  - Selecting address type...
+CustomerDetailPage: Selecting Random Address Type
+Selected random option: Address new
+  - Entering address in address1 field...
+    Generated address: 69679 Willms Hill
+CustomerDetailPage: Entering Address in address1 field: 69679 Willms Hill
+CustomerDetailPage: Address entered successfully
+  - Clicking elsewhere on screen to trigger validation...
+  - Clicking Save button...
+CustomerDetailPage: Clicking Save Basic Details
+  - Save button clicked, waiting for page response...
+  - Save complete, checking if re-navigation is needed...
+CustomerDetailPage: Checking if re-navigation is needed after save
+CustomerDetailPage: Current URL: https://qalmsbu.cubictree.com/Customers/Details/10119
+CustomerDetailPage: Still on detail page, no re-navigation needed
+CustomerDetailPage: fillBasicDetailsWithRandomData completed
+? Basic details completed
+
+>>> STEP 2: Fill NPA Details
+CustomerDetailPage: Clicking NPA Section
+CustomerDetailPage: Clicking Edit NPA Details
+CustomerDetailPage: Clicking NPA Yes
+CustomerDetailPage: Selecting Random NPA Type
+Selected random option: NPA
+CustomerDetailPage: Entering Date of Declaring NPA: 17-Feb-2026
+CustomerDetailPage: Selecting Random Pendency Reason
+Selected random option: NA
+CustomerDetailPage: Entering Pendency Remark: HFICRBUVPLFSOLISERFA
+CustomerDetailPage: Clicking Save NPA Details
+CustomerDetailPage: Checking if re-navigation is needed after save
+CustomerDetailPage: Current URL: https://qalmsbu.cubictree.com/Customers/Details/10119
+CustomerDetailPage: Still on detail page, no re-navigation needed
+? NPA details completed
+
+>>> STEP 3: Fill Trust/Service Provider Details
+CustomerDetailPage: Clicking Trust Section
+CustomerDetailPage: Clicking Add Trust
+CustomerDetailPage: Selecting Random Trust ID
+Selected random option: IUY
+CustomerDetailPage: Entering Date of Acquisition: 17-Feb-2026
+CustomerDetailPage: Entering Selling Bank: Bergnaum-Kassulke
+CustomerDetailPage: Clicking Save Trust
+CustomerDetailPage: Checking if re-navigation is needed after save
+CustomerDetailPage: Current URL: https://qalmsbu.cubictree.com/Customers/Details/10119
+CustomerDetailPage: Still on detail page, no re-navigation needed
+? Trust details completed
+
+>>> STEP 4: Fill Ownership Details
+CustomerDetailPage: Filling Ownership Details
+CustomerDetailPage: Clicking Ownership Section
+  - Clicking Secondary Dealing Officer tab...
+CustomerDetailPage: Clicking Secondary Dealing Officer Tab
+  - Clicking Addition button: //*[@id='CustSDO']/div/div[1]/span/a
+CustomerDetailPage: Clicking Add Secondary Officer
+  - Waiting for modal/form to load...
+  - Clicking Checkbox: //*[@id='edit_4']
+CustomerDetailPage: Attempting to click Officer Checkbox
+  - Target XPath: //*[@id='edit_4']
+  - Outer HTML: /html/body/div[6]/div/table/tbody/tr[2]/td[2]/div/div/div/form[2]/div/div[1]/div/div/table/tbody/tr[1]/td[2]/input
+  - Waiting 3 seconds for modal to fully load...
+  - Locator Strategy 1: //input[@id='edit_4' and @type='checkbox']
+    Found 0 checkbox(es)
+  - Locator Strategy 2: CSS Selector input#edit_4[type='checkbox']
+    Found 0 checkbox(es)
+  - Locator Strategy 3: XPath //*[@id='edit_4']

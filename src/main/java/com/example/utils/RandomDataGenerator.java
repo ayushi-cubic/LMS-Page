@@ -224,4 +224,128 @@ public class RandomDataGenerator {
         int year = 2020 + random.nextInt(7); // 2020-2026
         return String.format("%02d-%s-%04d", day, months[month], year);
     }
+    
+    /**
+     * Generate random numeric string of specified length
+     * @param length number of digits
+     * @return random numeric string
+     */
+    public static String generateRandomNumericString(int length) {
+        return generateNumeric(length);
+    }
+    
+    /**
+     * Generate random person name (wrapper for generateName)
+     * @return random name
+     */
+    public static String generateRandomName() {
+        return generateName();
+    }
+    
+    /**
+     * Generate random phone number (wrapper for generatePhoneNumber)
+     * @return random phone number
+     */
+    public static String generateRandomPhoneNumber() {
+        return generatePhoneNumber();
+    }
+    
+    /**
+     * Generate random email (wrapper for generateEmail)
+     * @return random email
+     */
+    public static String generateRandomEmail() {
+        return generateEmail();
+    }
+    
+    /**
+     * Generate random PAN in format AAAAA9999A
+     * @return PAN string
+     */
+    public static String generatePan() {
+        StringBuilder sb = new StringBuilder();
+        // 5 uppercase letters
+        for (int i = 0; i < 5; i++) {
+            sb.append((char) ('A' + random.nextInt(26)));
+        }
+        // 4 digits
+        for (int i = 0; i < 4; i++) {
+            sb.append(random.nextInt(10));
+        }
+        // 1 uppercase letter
+        sb.append((char) ('A' + random.nextInt(26)));
+        return sb.toString();
+    }
+    
+    /**
+     * Generate random address (wrapper for generateAddress)
+     * @return random address
+     */
+    public static String generateRandomAddress() {
+        return generateAddress();
+    }
+    
+    /**
+     * Generate random alphabetic string
+     * @param length number of characters
+     * @return random alphabetic string
+     */
+    public static String generateRandomAlphabeticString(int length) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < length; i++) {
+            sb.append((char) ('A' + random.nextInt(26)));
+        }
+        return sb.toString();
+    }
+    
+    /**
+     * Generate random alphanumeric string
+     * @param length number of characters
+     * @return random alphanumeric string
+     */
+    public static String generateRandomAlphanumericString(int length) {
+        return generateAlphanumeric(length);
+    }
+    
+    /**
+     * Generate random company name
+     * @return random company name
+     */
+    public static String generateRandomCompanyName() {
+        return faker.company().name();
+    }
+    
+    /**
+     * Generate random comment
+     * @return random comment
+     */
+    public static String generateRandomComment() {
+        return generateRemarks();
+    }
+    
+    /**
+     * Generate random account number
+     * @return random account number (12-16 digits)
+     */
+    public static String generateRandomAccountNumber() {
+        return "ACC" + generateNumeric(12);
+    }
+    
+    /**
+     * Generate random amount (between 10000 and 9999999)
+     * @return random amount as string
+     */
+    public static String generateRandomAmount() {
+        int amount = 10000 + random.nextInt(9990000); // 10000 to 9999999
+        return String.valueOf(amount);
+    }
+    
+    /**
+     * Generate random interest rate (between 5.00 and 18.00)
+     * @return random interest rate as string (e.g., "12.50")
+     */
+    public static String generateRandomInterestRate() {
+        double rate = 5.0 + (random.nextDouble() * 13.0); // 5.0 to 18.0
+        return String.format("%.2f", rate);
+    }
 }
