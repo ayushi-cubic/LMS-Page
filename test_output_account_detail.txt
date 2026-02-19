@@ -1,0 +1,490 @@
+﻿mvn : WARNING: A terminally deprecated method in sun.misc.Unsafe has been 
+called
+At line:1 char:1
++ mvn test -Dtest=AccountDetailManagementTestRunner 2>&1 | Out-File -Fi ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: A term...has been called 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+WARNING: sun.misc.Unsafe::staticFieldBase has been called by 
+com.google.inject.internal.aop.HiddenClassDefiner 
+(file:/C:/Program%20Files/apache-maven-3.9.11/lib/guice-5.1.0-classes.jar)
+WARNING: Please consider reporting this to the maintainers of class 
+com.google.inject.internal.aop.HiddenClassDefiner
+WARNING: sun.misc.Unsafe::staticFieldBase will be removed in a future release
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------< selenium.practice.com.example:seleniumpracticedemo >---------
+[INFO] Building seleniumpracticedemo 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ seleniumpracticedemo ---
+[INFO] skip non existing resourceDirectory C:\Users\DELL\Documents\Automation framework\LMS-Page\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ seleniumpracticedemo ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ seleniumpracticedemo ---
+[INFO] Copying 18 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ seleniumpracticedemo ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ seleniumpracticedemo ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.example.runner.AccountDetailManagementTestRunner
+
+@AccountDetailManagement @UpdateAccountDetails
+Scenario: Update account details with all fields                # features/AccountDetailManagement.feature:14
+
+Screenshots folder created: target/screenshots_20260218_160942
+
+==============================================
+STARTING TEST EXECUTION
+==============================================
+
+Generating Excel test case document...
+ERROR StatusLogger Log4j2 could not find a logging implementation. Please add 
+log4j-core to the classpath. Using SimpleLogger to log to the console...
+Excel test case file created successfully: Customer_Search_Test_Cases_20260218_160943.xlsx
+Excel file generated successfully: Customer_Search_Test_Cases_20260218_160943.xlsx
+
+Initializing browser...
+[main] INFO io.github.bonigarcia.wdm.WebDriverManager - Using chromedriver 
+145.0.7632.76 (resolved driver for Chrome 145)
+[main] INFO io.github.bonigarcia.wdm.WebDriverManager - Exporting 
+webdriver.chrome.driver as 
+C:\Users\DELL\.cache\selenium\chromedriver\win64\145.0.7632.76\chromedriver.exe
+Feb 18, 2026 4:09:46 PM org.openqa.selenium.devtools.CdpVersionFinder 
+findNearestMatch
+WARNING: Unable to find CDP implementation matching 145
+Feb 18, 2026 4:09:46 PM org.openqa.selenium.chromium.ChromiumDriver 
+lambda$new$5
+WARNING: Unable to find version of CDP to use for 145.0.7632.76. You may need 
+to include a dependency on a specific version of the CDP using something 
+similar to `org.seleniumhq.selenium:selenium-devtools-v86:4.25.0` where the 
+version ("v86") matches the version of the chromium-based browser you're using 
+and the version number of the artifact is the same as Selenium's.
+Browser initialized successfully
+
+==============================================
+Starting Scenario 1: Update account details with all fields
+==============================================
+  Given I open the LMS application                              # com.example.stepdefinitions.CustomerStepDefinitions.iOpenTheLMSApplication()
+
+    Embedding Step Screenshot [image/png 60012 bytes]
+
+Screenshot saved: target/screenshots_20260218_160942/step_001_Update_account_details_with_all_fields.png
+LoginPage.login() called with:
+  Email/Username: [ayushi]
+  Password: [Legal@1234]
+  When I login with username "ayushi" and password "Legal@1234" # com.example.stepdefinitions.CustomerStepDefinitions.iLoginWithUsernameAndPassword(java.lang.String,java.lang.String)
+
+    Embedding Step Screenshot [image/png 81923 bytes]
+
+Screenshot saved: target/screenshots_20260218_160942/step_002_Update_account_details_with_all_fields.png
+  And I enter OTP "123456"                                      # com.example.stepdefinitions.CustomerStepDefinitions.iEnterOTP(java.lang.String)
+
+    Embedding Step Screenshot [image/png 55896 bytes]
+
+Screenshot saved: target/screenshots_20260218_160942/step_003_Update_account_details_with_all_fields.png
+  Then I should be logged in successfully                       # com.example.stepdefinitions.CustomerStepDefinitions.iShouldBeLoggedInSuccessfully()
+
+    Embedding Step Screenshot [image/png 111010 bytes]
+
+Screenshot saved: target/screenshots_20260218_160942/step_004_Update_account_details_with_all_fields.png
+? Clicked on Borrowers menu
+  Given I navigate to Borrowers menu for account details        # com.example.stepdefinitions.AccountDetailStepDefinitions.iNavigateToBorrowersMenuForAccountDetails()
+
+    Embedding Step Screenshot [image/png 127136 bytes]
+
+Screenshot saved: target/screenshots_20260218_160942/step_005_Update_account_details_with_all_fields.png
+? Clicked on Account submenu
+  And I click on Account submenu for details                    # com.example.stepdefinitions.AccountDetailStepDefinitions.iClickOnAccountSubmenuForDetails()
+
+    Embedding Step Screenshot [image/png 109039 bytes]
+
+Screenshot saved: target/screenshots_20260218_160942/step_006_Update_account_details_with_all_fields.png
+? Clicked on Load Customer button
+  And I click on Load Customer button                           # com.example.stepdefinitions.AccountDetailStepDefinitions.iClickOnLoadCustomerButton()
+
+    Embedding Step Screenshot [image/png 148026 bytes]
+
+Screenshot saved: target/screenshots_20260218_160942/step_007_Update_account_details_with_all_fields.png
+? Clicked on Action button
+  And I click on Action button for first account                # com.example.stepdefinitions.AccountDetailStepDefinitions.iClickOnActionButtonForFirstAccount()
+
+    Embedding Step Screenshot [image/png 153326 bytes]
+
+Screenshot saved: target/screenshots_20260218_160942/step_008_Update_account_details_with_all_fields.png
+Current window before click: 972506BB1AFC5E2119A6FF71CFA8F66F
+? Clicked on Details button
+Total windows/tabs: 2
+? Switched to new tab
+New tab URL: https://qalmsbu.cubictree.com/CustomerAccounts/CustomerAccountDetails/10298
+Page fully loaded. Ready to edit account details.
+  And I click on Details button to open account details         # com.example.stepdefinitions.AccountDetailStepDefinitions.iClickOnDetailsButtonToOpenAccountDetails()
+
+    Embedding Step Screenshot [image/png 110858 bytes]
+
+Screenshot saved: target/screenshots_20260218_160942/step_009_Update_account_details_with_all_fields.png
+
+========================================
+Starting to fill Account Detail form...
+========================================
+
+? Clicked Edit button
+? Selected Account Type: PERSONAL LOAN
+? Selected Parent Account: ACC207585345986
+! Loan Disbursal Date field not found, using current date as reference
+? Selected Loan Agreement Date: 12-Jan-2026
+! Loan Disbursal Date field not found, using current date as reference
+? Selected Maturity Date: 23-May-2026
+? Selected Zone: NORTH
+? Selected Account Status: Deleted
+? Selected Business Unit: CTQA
+? Selected Upload Date: 18-Aug-2024
+? Selected NPA Type: NPA
+? Entered Block Type 1: VSKSPV01
+? Selected Date of Block Type 1: 19-Jan-2026
+? Entered Block Type 2: VBJ4PL13
+? Selected Date of Block Type 2: 10-Aug-2025
+? Selected Non Cooperative Borrower: Yes
+? Selected NPA Removal Date: 24-Dec-2026
+? Selected Business Date: 20-Oct-2025
+? Selected Scheme Name: Personal Loan
+? Selected Date of NPA: 06-Sep-2024
+? Selected Fraud: Yes
+
+========================================
+? Account Detail form filled successfully
+========================================
+
+! Error clicking Save button: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=145.0.7632.76)
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, findElement {using=xpath, value=//*[@id='SubmitBasicEditDetails']}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+
+========================================
+? Account Detail update completed successfully
+========================================
+
+  When I complete account detail update with all fields         # com.example.stepdefinitions.AccountDetailStepDefinitions.iCompleteAccountDetailUpdateWithAllFields()
+Failed to capture step screenshot: invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', 
+java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, screenshot {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 
+145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., 
+userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, 
+goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, 
+networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: 
+windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., 
+se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: 
+false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, 
+unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: 
+true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: 
+true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+? Account details updated successfully
+  Then the account details should be updated successfully       # com.example.stepdefinitions.AccountDetailStepDefinitions.theAccountDetailsShouldBeUpdatedSuccessfully()
+Failed to capture step screenshot: invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', 
+java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, screenshot {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 
+145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., 
+userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, 
+goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, 
+networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: 
+windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., 
+se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: 
+false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, 
+unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: 
+true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: 
+true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+==============================================
+Finished Scenario 1: Update account details with all fields
+Status: PASSED
+==============================================
+
+
+@AccountDetailManagement @UpdateAccountDetailsStepByStep
+Scenario: Update account details step by step                   # features/AccountDetailManagement.feature:24
+==============================================
+Starting Scenario 2: Update account details step by step
+==============================================
+  Given I open the LMS application                              # com.example.stepdefinitions.CustomerStepDefinitions.iOpenTheLMSApplication()
+      org.openqa.selenium.NoSuchSessionException: invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, get {url=https://qalmsbu.cubictree.com/}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:313)
+	at com.example.pages.LoginPage.openApplication(LoginPage.java:40)
+	at com.example.stepdefinitions.CustomerStepDefinitions.iOpenTheLMSApplication(CustomerStepDefinitions.java:44)
+	at ?.I open the LMS application(classpath:features/AccountDetailManagement.feature:8)
+
+Failed to capture step screenshot: invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', 
+java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, screenshot {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 
+145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., 
+userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, 
+goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, 
+networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: 
+windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., 
+se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: 
+false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, 
+unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: 
+true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: 
+true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+  When I login with username "ayushi" and password "Legal@1234" # com.example.stepdefinitions.CustomerStepDefinitions.iLoginWithUsernameAndPassword(java.lang.String,java.lang.String)
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+  And I enter OTP "123456"                                      # com.example.stepdefinitions.CustomerStepDefinitions.iEnterOTP(java.lang.String)
+  Then I should be logged in successfully                       # com.example.stepdefinitions.CustomerStepDefinitions.iShouldBeLoggedInSuccessfully()
+  Given I navigate to Borrowers menu for account details        # com.example.stepdefinitions.AccountDetailStepDefinitions.iNavigateToBorrowersMenuForAccountDetails()
+  And I click on Account submenu for details                    # com.example.stepdefinitions.AccountDetailStepDefinitions.iClickOnAccountSubmenuForDetails()
+  And I click on Load Customer button                           # com.example.stepdefinitions.AccountDetailStepDefinitions.iClickOnLoadCustomerButton()
+  And I click on Action button for first account                # com.example.stepdefinitions.AccountDetailStepDefinitions.iClickOnActionButtonForFirstAccount()
+  And I click on Details button to open account details         # com.example.stepdefinitions.AccountDetailStepDefinitions.iClickOnDetailsButtonToOpenAccountDetails()
+  When I click Edit button on account details                   # com.example.stepdefinitions.AccountDetailStepDefinitions.iClickEditButtonOnAccountDetails()
+  And I select random Account Type                              # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomAccountType()
+  And I select random Parent Account                            # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomParentAccount()
+  And I select random Loan Agreement Date                       # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomLoanAgreementDate()
+  And I select random Maturity Date                             # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomMaturityDate()
+  And I select random Zone                                      # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomZone()
+  And I select random State                                     # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomState()
+  And I select random Location                                  # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomLocation()
+  And I select random Account Status                            # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomAccountStatus()
+  And I select random Business Unit                             # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomBusinessUnit()
+  And I select random Upload Date                               # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomUploadDate()
+  And I select random NPA Type                                  # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomNPAType()
+  And I enter random Block Type 1                               # com.example.stepdefinitions.AccountDetailStepDefinitions.iEnterRandomBlockType1()
+  And I select random Date of Block Type 1                      # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomDateOfBlockType1()
+  And I enter random Block Type 2                               # com.example.stepdefinitions.AccountDetailStepDefinitions.iEnterRandomBlockType2()
+  And I select random Date of Block Type 2                      # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomDateOfBlockType2()
+  And I select random Non Cooperative Borrower                  # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomNonCooperativeBorrower()
+  And I select random NPA Removal Date                          # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomNPARemovalDate()
+  And I select random Business Date                             # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomBusinessDate()
+  And I select random Scheme Name                               # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomSchemeName()
+  And I select random Date of NPA                               # com.example.stepdefinitions.AccountDetailStepDefinitions.iSelectRandomDateOfNPA()
+  And I click Fraud Yes radio button                            # com.example.stepdefinitions.AccountDetailStepDefinitions.iClickFraudYesRadioButton()
+  And I click Save button on account details                    # com.example.stepdefinitions.AccountDetailStepDefinitions.iClickSaveButtonOnAccountDetails()
+  Then the account details should be updated successfully       # com.example.stepdefinitions.AccountDetailStepDefinitions.theAccountDetailsShouldBeUpdatedSuccessfully()
+Failed to capture screenshot: invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', 
+java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, screenshot {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 
+145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., 
+userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, 
+goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, 
+networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: 
+windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., 
+se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: 
+false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, 
+unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: 
+true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: 
+true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+==============================================
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+Finished Scenario 2: Update account details step by step
+Status: FAILED
+==============================================
+
+
+@AccountDetailManagement @QuickAccountDetailsUpdate
+Scenario: Quick account details update                          # features/AccountDetailManagement.feature:56
+==============================================
+Starting Scenario 3: Quick account details update
+==============================================
+  Given I open the LMS application                              # com.example.stepdefinitions.CustomerStepDefinitions.iOpenTheLMSApplication()
+      org.openqa.selenium.NoSuchSessionException: invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, get {url=https://qalmsbu.cubictree.com/}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:313)
+	at com.example.pages.LoginPage.openApplication(LoginPage.java:40)
+	at com.example.stepdefinitions.CustomerStepDefinitions.iOpenTheLMSApplication(CustomerStepDefinitions.java:44)
+	at ?.I open the LMS application(classpath:features/AccountDetailManagement.feature:8)
+
+Failed to capture step screenshot: invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', 
+java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, screenshot {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 
+145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., 
+userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, 
+goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, 
+networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: 
+windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., 
+se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: 
+false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, 
+unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: 
+true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: 
+true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+  When I login with username "ayushi" and password "Legal@1234" # com.example.stepdefinitions.CustomerStepDefinitions.iLoginWithUsernameAndPassword(java.lang.String,java.lang.String)
+  And I enter OTP "123456"                                      # com.example.stepdefinitions.CustomerStepDefinitions.iEnterOTP(java.lang.String)
+  Then I should be logged in successfully                       # com.example.stepdefinitions.CustomerStepDefinitions.iShouldBeLoggedInSuccessfully()
+  Given I navigate to account details page                      # com.example.stepdefinitions.AccountDetailStepDefinitions.iNavigateToAccountDetailsPage()
+  When I fill all account detail fields with random data        # com.example.stepdefinitions.AccountDetailStepDefinitions.iFillAllAccountDetailFieldsWithRandomData()
+  And I save the account details                                # com.example.stepdefinitions.AccountDetailStepDefinitions.iSaveTheAccountDetails()
+  Then the account details should be updated successfully       # com.example.stepdefinitions.AccountDetailStepDefinitions.theAccountDetailsShouldBeUpdatedSuccessfully()
+Failed to capture screenshot: invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', 
+java.version: '25'
+==============================================
+Finished Scenario 3: Quick account details update
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, screenshot {}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 
+145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., 
+userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, 
+goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, 
+networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: 
+windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., 
+se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: 
+false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, 
+unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: 
+true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: 
+true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+Status: FAILED
+==============================================
+
+[ERROR] Tests run: 50, Failures: 0, Errors: 2, Skipped: 47, Time elapsed: 158.7 s <<< FAILURE! -- in com.example.runner.AccountDetailManagementTestRunner
+[ERROR] Account Detail Management.Update account details step by step -- Time elapsed: 0.115 s <<< ERROR!
+org.openqa.selenium.NoSuchSessionException: 
+invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, get {url=https://qalmsbu.cubictree.com/}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:313)
+	at com.example.pages.LoginPage.openApplication(LoginPage.java:40)
+	at com.example.stepdefinitions.CustomerStepDefinitions.iOpenTheLMSApplication(CustomerStepDefinitions.java:44)
+	at ?.I open the LMS application(classpath:features/AccountDetailManagement.feature:8)
+
+[ERROR] Account Detail Management.Quick account details update -- Time elapsed: 0.041 s <<< ERROR!
+org.openqa.selenium.NoSuchSessionException: 
+invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, get {url=https://qalmsbu.cubictree.com/}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:483)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebDriver.get(RemoteWebDriver.java:313)
+	at com.example.pages.LoginPage.openApplication(LoginPage.java:40)
+	at com.example.stepdefinitions.CustomerStepDefinitions.iOpenTheLMSApplication(CustomerStepDefinitions.java:44)
+	at ?.I open the LMS application(classpath:features/AccountDetailManagement.feature:8)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, get {url=https://qalmsbu.cubictree.com/}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+[ERROR]   invalid session id
+Build info: version: '4.25.0', revision: '8a8aea2337'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '25'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [3b3bd14e1528672d9cce46af283e60c6, get {url=https://qalmsbu.cubictree.com/}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 145.0.7632.76, chrome: {chromedriverVersion: 145.0.7632.76 (ee36f024f43a..., userDataDir: C:\Users\DELL\AppData\Local...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:54170}, goog:processID: 6952, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:54170/devtoo..., se:cdpVersion: 145.0.7632.76, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 3b3bd14e1528672d9cce46af283e60c6
+[INFO] 
+[ERROR] Tests run: 50, Failures: 0, Errors: 2, Skipped: 47
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:45 min
+[INFO] Finished at: 2026-02-18T16:12:21+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project seleniumpracticedemo: 
+[ERROR] 
+[ERROR] Please refer to C:\Users\DELL\Documents\Automation framework\LMS-Page\target\surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
