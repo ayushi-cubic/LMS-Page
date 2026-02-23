@@ -1,5 +1,6 @@
 package com.example.pages;
 
+import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,8 +38,19 @@ public class LoginPage {
      * @param url application URL
      */
     public void openApplication(String url) {
-        driver.get(url);
-        driver.manage().window().maximize();
+        try {
+            driver.get(url);
+            driver.manage().window().maximize();
+        } catch (NoSuchWindowException e) {
+            java.util.Set<String> handles = driver.getWindowHandles();
+            if (!handles.isEmpty()) {
+                driver.switchTo().window(handles.iterator().next());
+                driver.get(url);
+                driver.manage().window().maximize();
+            } else {
+                throw e;
+            }
+        }
     }
     
     /**

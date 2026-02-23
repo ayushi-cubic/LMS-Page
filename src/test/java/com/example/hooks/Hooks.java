@@ -73,7 +73,7 @@ public class Hooks {
                         java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".xlsx";
                     generator.saveToFile(filePath);
                     System.out.println("Excel file generated successfully: " + filePath);
-                } else if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("AssetManagement"))) {
+                } else if (scenario.getSourceTagNames().stream().anyMatch(tag -> tag.contains("AssetManagement") || tag.contains("AssetDetailManagement"))) {
                     generator = new ExcelTestCaseGenerator("Asset Test Cases");
                     generator.createHeader();
                     generator.addAssetLoginTestCase(true);
